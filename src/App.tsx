@@ -3,10 +3,14 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import Footer from './components/Footer'
 import NavBar from './components/NavBar'
 import Home from './pages/Home'
+import About from './pages/About'
+import Services from './pages/Services'
 import CaseStudies from './pages/CaseStudies'
 import Blog from './pages/Blog'
 import Contact from './pages/Contact'
 import Portal from './pages/Portal'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsOfService from './pages/TermsOfService'
 
 function App() {
   const location = useLocation()
@@ -25,10 +29,14 @@ function App() {
           >
             <Routes location={location}>
               <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
               <Route path="/case-studies" element={<CaseStudies />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/portal" element={<Portal />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
             </Routes>
           </motion.div>
         </AnimatePresence>

@@ -53,18 +53,12 @@ function Footer() {
           <div className="space-y-4">
             <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400">Navigation</h4>
             <ul className="space-y-2.5 text-sm font-medium text-zinc-650">
-              <li>
-                <Link to="/" className="hover:text-zinc-950 transition">Home</Link>
-              </li>
-              <li>
-                <Link to="/case-studies" className="hover:text-zinc-950 transition">Case Studies</Link>
-              </li>
-              <li>
-                <Link to="/blog" className="hover:text-zinc-950 transition">Insights</Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-zinc-950 transition">Contact</Link>
-              </li>
+              <li><Link to="/" className="hover:text-zinc-950 transition">Home</Link></li>
+              <li><Link to="/about" className="hover:text-zinc-950 transition">About Us</Link></li>
+              <li><Link to="/services" className="hover:text-zinc-950 transition">Services</Link></li>
+              <li><Link to="/case-studies" className="hover:text-zinc-950 transition">Case Studies</Link></li>
+              <li><Link to="/blog" className="hover:text-zinc-950 transition">Insights</Link></li>
+              <li><Link to="/contact" className="hover:text-zinc-950 transition">Contact</Link></li>
             </ul>
           </div>
 
@@ -90,8 +84,8 @@ function Footer() {
         <div className="border-t border-zinc-200/60 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs text-zinc-500 font-medium">
           <p>WisdomCore Solutions © 2026. All rights reserved.</p>
           <div className="flex gap-4">
-            <a href="#" className="hover:underline">Privacy Policy</a>
-            <a href="#" className="hover:underline">Terms of Service</a>
+            <Link to="/privacy-policy" className="hover:underline">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="hover:underline">Terms of Service</Link>
           </div>
         </div>
       </div>
