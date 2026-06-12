@@ -11,7 +11,7 @@ function NavBar() {
     <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 xl:px-0">
         <Link to="/" className="flex items-center gap-3 text-xl font-semibold text-zinc-950">
-          <img src="/logo-icon.png" alt="WisdomCore Logo" className="h-9 w-9 object-contain" />
+          <img src="/logo-icon.png" alt="WisdomCore Logo" className="h-10 w-10 object-contain rounded-full" />
           <span className="tracking-tight font-bold">
             WisdomCore<span className="text-zinc-500 font-medium">Solutions</span>
           </span>

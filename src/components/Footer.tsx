@@ -9,7 +9,7 @@ function Footer() {
           {/* Logo & Description */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <img src="/logo-icon.png" alt="WisdomCore Logo" className="h-8 w-8 object-contain" />
+              <img src="/logo-icon.png" alt="WisdomCore Logo" className="h-10 w-10 object-contain rounded-full" />
               <span className="text-lg font-bold tracking-tight text-zinc-950">
                 WisdomCore<span className="text-zinc-500 font-medium">Solutions</span>
               </span>

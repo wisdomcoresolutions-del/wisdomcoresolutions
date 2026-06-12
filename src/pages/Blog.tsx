@@ -241,6 +241,7 @@ function Blog() {
                 const shareOnWhatsApp = `https://api.whatsapp.com/send?text=${shareText}%20${encodeURIComponent(shareUrl)}`
                 const shareOnLinkedIn = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`
                 const shareOnTwitter = `https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(shareUrl)}`
+                const shareOnFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`
 
                 return (
                   <div className="flex flex-wrap items-center gap-2.5 py-4 border-y border-zinc-100 text-xs">
@@ -273,6 +274,15 @@ function Blog() {
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-200 bg-zinc-50 text-zinc-800 hover:bg-zinc-100 transition font-medium"
                     >
                       Twitter / X
+                    </a>
+
+                    <a
+                      href={shareOnFacebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-800 hover:bg-indigo-100 transition font-medium"
+                    >
+                      Facebook
                     </a>
 
                     <button
