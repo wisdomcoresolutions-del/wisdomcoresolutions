@@ -7,7 +7,7 @@ create table if not exists public.blogs (
   category text not null,
   cover_image_url text,
   content text,
-  author_id uuid references auth.users(id),
+  author_id uuid,
   created_at timestamp with time zone default now()
 );
 
