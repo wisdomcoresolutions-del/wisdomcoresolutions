@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /portal
 
-Sitemap: https://wisdomcoresolutions.vercel.app/sitemap.xml
+Sitemap: https://wisdomcoresolutions.store/sitemap.xml

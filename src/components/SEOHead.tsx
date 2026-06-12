@@ -11,7 +11,7 @@ interface SEOHeadProps {
   noIndex?: boolean
 }
 
-const SITE_URL = 'https://wisdomcoresolutions.vercel.app'
+const SITE_URL = 'https://wisdomcoresolutions.store'
 const DEFAULT_IMAGE = `${SITE_URL}/og-cover.png`
 
 function SEOHead({
