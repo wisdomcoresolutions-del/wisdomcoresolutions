@@ -4,12 +4,14 @@ import { BookOpen, Calendar, ArrowRight, X, AlertCircle } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface BlogPost {
-  id: string
+  id: string | number
   title: string
-  subtitle: string
+  subtitle?: string
+  excerpt?: string
   content: string
   category: string
   published_at?: string
+  created_at?: string
   read_time?: string
   metrics?: string
 }
@@ -75,7 +77,7 @@ function Blog() {
         const { data, error } = await supabase
           .from('blogs')
           .select('*')
-          .order('published_at', { ascending: false })
+          .order('created_at', { ascending: false })
 
         if (error) {
           throw error
@@ -134,14 +136,14 @@ function Blog() {
 
                 <div className="space-y-2">
                   <h2 className="text-xl font-bold text-zinc-950 leading-tight tracking-tight">{post.title}</h2>
-                  <p className="text-zinc-650 text-xs leading-5">{post.subtitle}</p>
+                  <p className="text-zinc-650 text-xs leading-5">{post.subtitle || post.excerpt}</p>
                 </div>
               </div>
 
               <div className="border-t border-zinc-100 pt-4 flex items-center justify-between">
                 <div className="flex items-center gap-2 text-[11px] text-zinc-500 font-medium">
                   <Calendar size={13} />
-                  <span>{post.published_at?.split('T')[0] || 'June 2026'}</span>
+                  <span>{(post.published_at || post.created_at)?.split('T')[0] || 'June 2026'}</span>
                 </div>
                 <button
                   onClick={() => setSelectedPost(post)}
@@ -193,7 +195,7 @@ function Blog() {
                   {selectedPost.title}
                 </h2>
                 <p className="text-zinc-600 text-sm leading-6 italic">
-                  {selectedPost.subtitle}
+                  {selectedPost.subtitle || selectedPost.excerpt}
                 </p>
               </div>
 
