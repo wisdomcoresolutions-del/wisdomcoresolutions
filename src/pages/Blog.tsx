@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { isSupabaseConfigured, supabase } from '../lib/supabaseClient'
-import { BookOpen, Calendar, ArrowRight, X, AlertCircle } from 'lucide-react'
+import { BookOpen, Calendar, ArrowRight, X, AlertCircle, Share2, Copy, Check } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SEOHead from '../components/SEOHead'
 
 interface BlogPost {
   id: string | number
   title: string
+  slug?: string
   subtitle?: string
   excerpt?: string
   content: string
@@ -21,6 +22,7 @@ const STATIC_FALLBACK_POSTS: BlogPost[] = [
   {
     id: 'static-1',
     title: 'Offline-First Architecture in Dairy ERP Systems',
+    slug: 'offline-first-dairy-erp',
     subtitle: 'How we solved remote synchronization and hardware failover using local SQLite caches and Supabase background sync.',
     content: `In operations-heavy industries like dairy logistics, internet connectivity is rarely guaranteed. Dairy collection centers are often located in remote regions with intermittent network connectivity. Standard SaaS options fail here because they rely on continuous cloud check-ins.
 
@@ -40,6 +42,7 @@ Key architecture rules applied:
   {
     id: 'static-2',
     title: 'Optimizing PostgreSQL Query Speeds for 50k+ Daily Site Logs',
+    slug: 'optimizing-postgresql-query-speeds',
     subtitle: 'A review of partition strategies, index clustering, and database caching patterns used in modern construction supply chains.',
     content: `As construction ERP platforms scale, single-table systems begin to experience query degradation. In our LogiBuild ecosystem, daily transit entries grew exponentially, leading to 1.5s+ latency profiles.
 
@@ -63,6 +66,7 @@ function Blog() {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null)
   const [loading, setLoading] = useState(false)
   const [dbError, setDbError] = useState<string | null>(null)
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     async function fetchBlogs() {
@@ -97,6 +101,29 @@ function Blog() {
 
     fetchBlogs()
   }, [])
+
+  // Auto-detect post parameter to show modal on shared link loading
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const postSlugOrId = params.get('post')
+    if (postSlugOrId && posts.length > 0) {
+      const found = posts.find(p => p.slug === postSlugOrId || String(p.id) === postSlugOrId)
+      if (found) {
+        setSelectedPost(found)
+      }
+    }
+  }, [posts])
+
+  const handleOpenPost = (post: BlogPost) => {
+    setSelectedPost(post)
+    const newUrl = `${window.location.pathname}?post=${post.slug || post.id}`
+    window.history.pushState(null, '', newUrl)
+  }
+
+  const handleClosePost = () => {
+    setSelectedPost(null)
+    window.history.pushState(null, '', window.location.pathname)
+  }
 
   return (
     <section className="space-y-12 py-10">
@@ -154,7 +181,7 @@ function Blog() {
                   <span>{(post.published_at || post.created_at)?.split('T')[0] || 'June 2026'}</span>
                 </div>
                 <button
-                  onClick={() => setSelectedPost(post)}
+                  onClick={() => handleOpenPost(post)}
                   className="flex items-center gap-1.5 text-xs font-bold text-zinc-900 hover:text-zinc-800"
                 >
                   <span>Read Article</span>
@@ -174,7 +201,7 @@ function Blog() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/40 backdrop-blur-sm p-4 md:p-6"
-            onClick={() => setSelectedPost(null)}
+            onClick={handleClosePost}
           >
             <motion.div
               initial={{ scale: 0.96, opacity: 0 }}
@@ -186,7 +213,7 @@ function Blog() {
             >
               {/* Close Button */}
               <button
-                onClick={() => setSelectedPost(null)}
+                onClick={handleClosePost}
                 className="absolute top-5 right-5 h-8 w-8 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50 flex items-center justify-center text-zinc-650 transition"
               >
                 <X size={15} />
@@ -206,6 +233,71 @@ function Blog() {
                   {selectedPost.subtitle || selectedPost.excerpt}
                 </p>
               </div>
+
+              {/* Dynamic Social Sharing Utility */}
+              {(() => {
+                const shareUrl = `${window.location.origin}/blog?post=${selectedPost.slug || selectedPost.id}`
+                const shareText = encodeURIComponent(`Read this engineering insight from WisdomCore: "${selectedPost.title}"`)
+                const shareOnWhatsApp = `https://api.whatsapp.com/send?text=${shareText}%20${encodeURIComponent(shareUrl)}`
+                const shareOnLinkedIn = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`
+                const shareOnTwitter = `https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(shareUrl)}`
+
+                return (
+                  <div className="flex flex-wrap items-center gap-2.5 py-4 border-y border-zinc-100 text-xs">
+                    <span className="text-zinc-400 font-bold uppercase tracking-wider flex items-center gap-1.5 mr-1.5">
+                      <Share2 size={13} /> Share
+                    </span>
+                    
+                    <a
+                      href={shareOnWhatsApp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 transition font-medium"
+                    >
+                      WhatsApp
+                    </a>
+
+                    <a
+                      href={shareOnLinkedIn}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-blue-800 hover:bg-blue-100 transition font-medium"
+                    >
+                      LinkedIn
+                    </a>
+
+                    <a
+                      href={shareOnTwitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-200 bg-zinc-50 text-zinc-800 hover:bg-zinc-100 transition font-medium"
+                    >
+                      Twitter / X
+                    </a>
+
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(shareUrl)
+                        setCopied(true)
+                        setTimeout(() => setCopied(false), 2000)
+                      }}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-50 transition font-medium sm:ml-auto"
+                    >
+                      {copied ? (
+                        <>
+                          <Check size={12} className="text-emerald-600" />
+                          <span className="text-emerald-700">Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy size={12} />
+                          <span>Copy Link</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                )
+              })()}
 
               {selectedPost.metrics && (
                 <div className="p-4 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-900 text-xs font-bold">
