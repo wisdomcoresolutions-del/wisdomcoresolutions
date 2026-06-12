@@ -2,8 +2,7 @@ export const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Case Studies', href: '/case-studies' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'Client Portal', href: '/portal' }
+  { label: 'Contact', href: '/contact' }
 ]
 
 export const pillars = [

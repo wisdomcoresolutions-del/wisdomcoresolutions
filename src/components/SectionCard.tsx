@@ -11,8 +11,8 @@ function SectionCard({ title, description }: SectionCardProps) {
       whileHover={{ y: -6 }}
       className="glass-card rounded-3xl p-6"
     >
-      <h3 className="text-lg font-semibold text-white">{title}</h3>
-      <p className="mt-3 text-slate-400">{description}</p>
+      <h3 className="text-lg font-bold text-zinc-950">{title}</h3>
+      <p className="mt-2 text-xs leading-5 text-zinc-600 font-normal">{description}</p>
     </motion.div>
   )
 }

@@ -1,117 +1,449 @@
-import { motion } from 'framer-motion'
-import { ArrowRight, Cloud, Database, ShieldCheck } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { 
+  ArrowRight, Cloud, Database, ShieldCheck, Terminal, Cpu, Layers, 
+  Workflow, CheckCircle, ChevronDown, ChevronUp, Star, Users, Briefcase, 
+  Settings, Award, Zap, Phone, BookOpen
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { pillars, services } from '../data/content'
+import { Component as EtheralShadow } from '../components/ui/etheral-shadow'
+
+const STATS = [
+  { value: '99.9%', label: 'Uptime Architecture SLA' },
+  { value: '3x', label: 'Faster Reporting Cycles' },
+  { value: '₹4.5Cr+', label: 'Monthly Transactions Managed' },
+  { value: '0.2%', label: 'Logistics Discrepancy Margin' }
+]
+
+const INDUSTRIES = [
+  'Healthcare', 'Education', 'Retail', 'Manufacturing', 
+  'Agriculture', 'Hospitality', 'Construction', 'Logistics', 'Government'
+]
+
+const SERVICES_V2 = [
+  {
+    icon: Cpu,
+    title: 'Custom ERP Systems',
+    desc: 'Bespoke ERPs built for manufacturing, construction, and dairy systems. Integrated approvals, multi-site sync, and GST reporting.',
+    badge: 'Flagship'
+  },
+  {
+    icon: Cloud,
+    title: 'Cloud Solutions',
+    desc: 'High-availability infrastructure architected on AWS and Cloudflare. Automated failover, database clustering, and security controls.',
+    badge: 'Enterprise'
+  },
+  {
+    icon: Database,
+    title: 'Database Engineering',
+    desc: 'High-performance PostgreSQL optimization. Index tuning, partition schemes, and data pipelines handling 50k+ daily transactions.',
+    badge: 'Optimized'
+  },
+  {
+    icon: Terminal,
+    title: 'API & Microservices',
+    desc: 'Secure, RESTful and GraphQL API design. Synchronous third-party integration, audit trail logging, and low-latency response profiles.',
+    badge: 'Custom'
+  },
+  {
+    icon: ShieldCheck,
+    title: 'UI/UX & Systems Design',
+    desc: 'Framer Motion animations, interactive dashboards, and design systems crafted for operations-heavy enterprise tools.',
+    badge: 'Elite'
+  },
+  {
+    icon: Zap,
+    title: 'Business Automation',
+    desc: 'Replacement of manual spreadsheet entries with automated reconciliation engines, notification systems, and approval flows.',
+    badge: 'Impactful'
+  }
+]
+
+const PRODUCTS = [
+  {
+    name: 'WisdomCore Dairy ERP',
+    tag: 'Dairy Logistics',
+    desc: 'Automated billing, FAT/SNF calculation engines, offline collection sync, and real-time farmer reconciliation charts.',
+    features: ['SNF/Fat Auto-calculation', 'Offline-First Collection Sync', 'SMS Payout Alerts']
+  },
+  {
+    name: 'WisdomCore LogiBuild',
+    tag: 'Construction Supply Chain',
+    desc: 'Multi-site inventory tracker, predictive raw materials ordering, dispatch scheduler, and transit audit logging.',
+    features: ['Real-Time Site Logs', 'Smart Inventory Alerts', 'Vendor Billing Auditing']
+  },
+  {
+    name: 'WisdomCore HMS Pro',
+    tag: 'Healthcare Operations',
+    desc: 'Patient records manager, real-time bed allocation dashboard, pharmacy inventory integration, and automated discharge billing.',
+    features: ['Secure Health Records', 'GST Invoicing Terminal', 'Doctor Consultation Scheduler']
+  }
+]
+
+const PROCESS_STEPS = [
+  { phase: '01', title: 'Intake & Architecture Discovery', desc: 'We review your manual process map, identify database requirements, and finalize structural parameters.' },
+  { phase: '02', title: 'Systems Design & DB Schema', desc: 'Design high-fidelity wireframes, map API paths, and structure the PostgreSQL/Supabase tables.' },
+  { phase: '03', title: 'High-Fidelity Engineering', desc: 'Develop modular components using React, Tailwind CSS, secure backends, and offline-first databases.' },
+  { phase: '04', title: 'Strict Quality Assurance', desc: 'Automated test suite runs, vulnerability scans, audit verification, and deployment to staging.' },
+  { phase: '05', title: 'Production & SLA Launch', desc: 'Deploy to Cloudflare/AWS, transfer controls to local administrators, and initiate 24/7 uptime monitoring.' }
+]
+
+const TECH_CATEGORIES: Record<string, string[]> = {
+  Frontend: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'Redux Toolkit'],
+  Backend: ['Node.js', 'NestJS', 'Express', 'JWT Auth', 'REST/GraphQL API'],
+  Database: ['Supabase', 'PostgreSQL', 'Prisma ORM', 'Redis Cache', 'SQLite (Offline)'],
+  CloudOps: ['AWS S3/EC2', 'Docker', 'Cloudflare CDN', 'GitHub Actions', 'Vercel']
+}
+
+const FAQS = [
+  { q: 'Why build a custom ERP instead of choosing a standard SaaS?', a: 'SaaS platforms require your business to change its workflows to match their software. WisdomCore builds custom systems around your exact manual process, eliminating data drift and SaaS licensing fees.' },
+  { q: 'How does the offline-first sync mechanism function?', a: 'For remote collection centers (like dairy centers or construction sites), our systems store transactions locally in an encrypted SQLite database. When internet connectivity is restored, a secure sync engine reconciles entries with the Supabase primary database.' },
+  { q: 'What database optimizations do you apply for high transaction scales?', a: 'We apply read-write splitting, partition logs tables by month, configure custom indexes, and integrate Redis cache layers. This ensures response times remain under 150ms even during peak workloads.' },
+  { q: 'What kind of support SLA does WisdomCore provide?', a: 'We offer dedicated Level-3 engineering support with active uptime monitoring, regular database backups, security patches, and direct support lines for system administrators.' }
+]
 
 function Home() {
-  return (
-    <section className="space-y-16 py-10">
-      <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-        <div className="space-y-8">
-          <div className="inline-flex items-center gap-3 rounded-full border border-slate-700/80 bg-white/3 px-4 py-2 text-sm text-slate-200">
-            Enterprise-grade engineering for operations-heavy industries
-          </div>
-          <div className="space-y-6">
-            <h1 className="max-w-3xl text-5xl font-semibold leading-tight text-white sm:text-6xl">
-              Built for how your business actually works.
-            </h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-300">
-              We design and deploy precision-engineered custom ERPs, web ecosystems, and cloud infrastructure for industries with complex operational workflows.
-            </p>
-          </div>
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <Link
-              to="/contact"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-500 px-6 py-4 text-sm font-semibold text-slate-950 transition hover:bg-accent-400 sm:w-auto"
-            >
-              Schedule an Architecture Consultation
-              <ArrowRight size={18} />
-            </Link>
-            <Link
-              to="/case-studies"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-slate-700/80 bg-slate-900/80 px-6 py-4 text-sm font-semibold text-slate-100 transition hover:border-accent-500 sm:w-auto"
-            >
-              Explore Case Studies
-            </Link>
-          </div>
-        </div>
+  const [activeTechTab, setActiveTechTab] = useState('Frontend')
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
 
-        <div className="glass-card rounded-[2rem] border border-slate-800/60 p-8 shadow-glow">
-          <div className="flex items-center gap-4 text-slate-100">
-            <div className="grid h-14 w-14 place-items-center rounded-3xl bg-slate-900/90 text-accent-300">
-              <Cloud size={28} />
+  return (
+    <section className="space-y-20 py-6">
+      {/* 1. Hero Section with off-white card layout */}
+      <div className="relative overflow-hidden rounded-[2.5rem] border border-zinc-200 bg-white p-8 md:p-16 shadow-sm min-h-[600px] flex items-center">
+        <EtheralShadow
+          className="absolute inset-0 -z-10"
+          color="rgba(9, 9, 11, 0.01)" // Minimalist soft grey gradient
+          animation={{ scale: 95, speed: 75 }}
+          noise={{ opacity: 0.2, scale: 1.15 }}
+          sizing="fill"
+        />
+        
+        <div className="relative grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center w-full">
+          <div className="space-y-8 text-left">
+            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-zinc-700">
+              <Zap size={13} className="text-zinc-900" />
+              <span>Premium Enterprise IT Ecosystems</span>
             </div>
-            <div>
-              <p className="text-sm uppercase tracking-[0.25em] text-accent-300">Trusted Delivery</p>
-              <p className="mt-1 text-xl font-semibold text-white">Precision delivery from planning to launch</p>
+            
+            <div className="space-y-6">
+              <h1 className="text-4xl font-extrabold leading-[1.1] text-zinc-950 sm:text-5xl lg:text-6xl tracking-tight">
+                Engineering <br />
+                <span className="text-zinc-800">
+                  Digital Excellence.
+                </span>
+              </h1>
+              <p className="max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg">
+                We design and deploy precision-engineered custom ERPs, high-throughput database systems, and secure cloud infrastructure for operations-heavy industries.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-zinc-950 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-zinc-800 shadow-sm"
+              >
+                <span>Book Free Consult</span>
+                <ArrowRight size={15} />
+              </Link>
+              <Link
+                to="/case-studies"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white px-7 py-3.5 text-sm font-medium text-zinc-800 transition hover:bg-zinc-50 hover:border-zinc-300"
+              >
+                <span>Explore Case Studies</span>
+              </Link>
             </div>
           </div>
-          <div className="mt-8 space-y-4 text-slate-300">
-            <p>Transparent engineering, secure integrations, and workflow-first systems for complex environments.</p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-3xl bg-slate-900/80 p-5">
-                <p className="text-sm uppercase tracking-[0.25em] text-slate-400">Deployment</p>
-                <p className="mt-2 font-semibold text-white">99.9% availability architecture</p>
+
+          {/* Minimalist Live Dashboard Panel */}
+          <div className="panel-card relative overflow-hidden border border-zinc-200 bg-white p-6 md:p-8 space-y-6 shadow-sm">
+            <div className="flex items-center justify-between border-b border-zinc-100 pb-4">
+              <div className="flex items-center gap-2">
+                <div className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
+                <div className="h-2.5 w-2.5 rounded-full bg-zinc-200" />
+                <div className="h-2.5 w-2.5 rounded-full bg-zinc-100" />
               </div>
-              <div className="rounded-3xl bg-slate-900/80 p-5">
-                <p className="text-sm uppercase tracking-[0.25em] text-slate-400">Security</p>
-                <p className="mt-2 font-semibold text-white">Role-aware access, audit-ready logs</p>
+              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest font-mono">wcs-terminal-v2.0</span>
+            </div>
+
+            <div className="space-y-4 font-mono text-xs text-zinc-600">
+              <div className="flex items-start gap-2">
+                <span className="text-zinc-400">$</span>
+                <p className="text-zinc-900 font-medium">wcs system --initialize --db=SupabaseClient</p>
+              </div>
+              <div className="flex items-start gap-2 text-zinc-800 bg-zinc-50 p-2 rounded-lg border border-zinc-100">
+                <span>✓</span>
+                <p className="leading-5">Connection established with secondary replication cluster (supabase.co)</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="text-zinc-400">$</span>
+                <p className="text-zinc-900 font-medium">wcs monitor --target=all-endpoints</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="rounded-2xl bg-zinc-50 p-4 border border-zinc-200">
+                <p className="text-[9px] uppercase tracking-wider text-zinc-400 font-bold">API Uptime</p>
+                <p className="text-lg font-bold text-zinc-900 mt-1">99.998%</p>
+              </div>
+              <div className="rounded-2xl bg-zinc-50 p-4 border border-zinc-200">
+                <p className="text-[9px] uppercase tracking-wider text-zinc-400 font-bold">Response Latency</p>
+                <p className="text-lg font-bold text-zinc-950 mt-1">118ms</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-3 bg-zinc-50 p-4 rounded-2xl border border-zinc-200">
+              <div className="h-9 w-9 rounded-xl bg-zinc-950 flex items-center justify-center text-white">
+                <Workflow size={16} />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-zinc-900">Active Deployment</p>
+                <p className="text-[11px] text-zinc-500 mt-0.5 font-medium">Construction LogiBuild v2.1.2 synced</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-3">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.08 }}
-          className="glass-card rounded-3xl border border-slate-800/80 p-8"
-        >
-          <h2 className="text-2xl font-semibold text-white">Core Services</h2>
-          <div className="mt-6 space-y-4">
-            <div className="rounded-3xl bg-slate-900/80 p-5">
-              <h3 className="font-semibold text-white">Custom ERP Development</h3>
-              <p className="mt-2 text-slate-400">Modular ERP systems built for traceability, approval flows, and cross-site orchestration.</p>
-            </div>
-            <div className="rounded-3xl bg-slate-900/80 p-5">
-              <h3 className="font-semibold text-white">Cloud Infrastructure Architecture</h3>
-              <p className="mt-2 text-slate-400">Resilient, monitored, and cost-controlled cloud stacks for mission-critical workloads.</p>
-            </div>
-            <div className="rounded-3xl bg-slate-900/80 p-5">
-              <h3 className="font-semibold text-white">Advanced Database Optimization</h3>
-              <p className="mt-2 text-slate-400">Indexing, partitioning, archiving, and performance engineering for high-frequency data.</p>
-            </div>
-          </div>
-        </motion.div>
+      {/* 2. Trusted Industries & Statistics */}
+      <div className="space-y-8">
+        <div className="text-center space-y-2">
+          <p className="text-[11px] uppercase tracking-[0.2em] text-zinc-400 font-bold">Broad Sector Expertise</p>
+          <h2 className="text-xl font-bold text-zinc-900">Targeted Software For High-Consequence Operations</h2>
+        </div>
+        
+        <div className="flex flex-wrap items-center justify-center gap-2.5 max-w-5xl mx-auto">
+          {INDUSTRIES.map((ind) => (
+            <span 
+              key={ind} 
+              className="rounded-full bg-white border border-zinc-200 px-4 py-2 text-xs font-medium text-zinc-700 tracking-wide hover:border-zinc-400 hover:text-zinc-950 transition duration-150"
+            >
+              {ind}
+            </span>
+          ))}
+        </div>
 
-        <section className="glass-card rounded-3xl border border-slate-800/80 p-8">
-          <h2 className="text-2xl font-semibold text-white">Why enterprises choose us</h2>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {pillars.map((pillar) => (
-              <div key={pillar.title} className="rounded-3xl bg-slate-900/80 p-5">
-                <h3 className="font-semibold text-white">{pillar.title}</h3>
-                <p className="mt-2 text-slate-400">{pillar.description}</p>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto pt-6">
+          {STATS.map((stat, i) => (
+            <div key={i} className="bg-white p-6 border border-zinc-200 rounded-[2rem] text-center space-y-1.5 shadow-sm">
+              <p className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight">
+                {stat.value}
+              </p>
+              <p className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 3. Core Enterprise Services */}
+      <div className="space-y-12">
+        <div className="space-y-3 text-center max-w-3xl mx-auto">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-400 font-bold">Specialized Capabilities</p>
+          <h2 className="text-3xl font-bold text-zinc-950 tracking-tight leading-tight">High-Fidelity Engineering Services</h2>
+          <p className="text-zinc-600 text-sm">
+            We architect systems optimized for absolute data validation, low latency, and secure operations.
+          </p>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {SERVICES_V2.map((serv, index) => {
+            const IconComponent = serv.icon
+            return (
+              <div 
+                key={index}
+                className="group flex flex-col justify-between p-6 md:p-8 rounded-[2rem] border border-zinc-200 bg-white transition duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:shadow-sm"
+              >
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <div className="h-10 w-10 rounded-xl bg-zinc-100 flex items-center justify-center text-zinc-800 transition-colors duration-200 group-hover:bg-zinc-950 group-hover:text-white">
+                      <IconComponent size={18} />
+                    </div>
+                    <span className="text-[9px] uppercase font-bold tracking-widest px-2.5 py-1 rounded-full bg-zinc-50 border border-zinc-200 text-zinc-500">
+                      {serv.badge}
+                    </span>
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-bold text-zinc-950">{serv.title}</h3>
+                    <p className="text-zinc-600 text-xs leading-5">{serv.desc}</p>
+                  </div>
+                </div>
               </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* 4. Product Showcase Section */}
+      <div className="space-y-12">
+        <div className="space-y-3 text-center max-w-3xl mx-auto">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-400 font-bold">Proprietary Software Systems</p>
+          <h2 className="text-3xl font-bold text-zinc-950 tracking-tight leading-tight">WisdomCore Flagship Ecosystems</h2>
+          <p className="text-zinc-600 text-sm">
+            Pre-built modular solutions customizable to fit your exact logistics and accounting rules.
+          </p>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-3">
+          {PRODUCTS.map((prod, index) => (
+            <div 
+              key={index} 
+              className="p-6 md:p-8 rounded-[2rem] border border-zinc-200 bg-white flex flex-col justify-between space-y-6 shadow-sm relative overflow-hidden"
+            >
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <span className="text-[9px] uppercase tracking-widest text-zinc-400 font-bold">{prod.tag}</span>
+                  <h3 className="text-xl font-bold text-zinc-950">{prod.name}</h3>
+                </div>
+                <p className="text-zinc-600 text-xs leading-5">{prod.desc}</p>
+                <div className="border-t border-zinc-100 pt-4 space-y-2">
+                  {prod.features.map((feat, i) => (
+                    <div key={i} className="flex items-center gap-2 text-xs text-zinc-800">
+                      <CheckCircle size={13} className="text-zinc-950 shrink-0" />
+                      <span className="font-medium">{feat}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <Link 
+                to="/contact"
+                className="w-full flex items-center justify-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 py-2.5 text-xs font-semibold text-zinc-800 hover:bg-zinc-100 hover:border-zinc-300 transition duration-150"
+              >
+                <span>Request Custom Demo</span>
+                <ArrowRight size={11} />
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 5. Interactive Tech Stack Tabs */}
+      <div className="rounded-[2rem] border border-zinc-200 bg-white p-6 md:p-8 space-y-6 max-w-5xl mx-auto shadow-sm">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between border-b border-zinc-100 pb-5 gap-4">
+          <div className="space-y-1">
+            <p className="text-[10px] uppercase tracking-widest text-zinc-400 font-bold">Interactive Tech Stack</p>
+            <h3 className="text-xl font-bold text-zinc-950">Engineered on Modern Stacks</h3>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {Object.keys(TECH_CATEGORIES).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTechTab(tab)}
+                className={`rounded-full px-4 py-1.5 text-xs font-semibold transition ${
+                  activeTechTab === tab
+                    ? 'bg-zinc-950 text-white'
+                    : 'bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100'
+                }`}
+              >
+                {tab}
+              </button>
             ))}
           </div>
-        </section>
+        </div>
 
-        <div className="rounded-3xl border border-slate-800/80 bg-slate-950/60 p-8">
-          <div className="flex items-center gap-4 text-accent-200">
-            <Database size={28} />
-            <div>
-              <p className="text-sm uppercase tracking-[0.25em]">Data-first engineering</p>
-              <p className="mt-1 text-xl font-semibold text-white">Built for high-throughput operations.</p>
+        <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+          <AnimatePresence mode="wait">
+            {TECH_CATEGORIES[activeTechTab].map((tech) => (
+              <motion.div
+                key={tech}
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.15 }}
+                className="flex items-center gap-2.5 bg-zinc-50 border border-zinc-200 rounded-xl p-3.5 transition hover:border-zinc-300"
+              >
+                <div className="h-1.5 w-1.5 rounded-full bg-zinc-400" />
+                <span className="text-xs font-semibold text-zinc-900">{tech}</span>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* 6. Development Process Timeline */}
+      <div className="space-y-12">
+        <div className="space-y-3 text-center max-w-3xl mx-auto">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-400 font-bold">Structured Delivery</p>
+          <h2 className="text-3xl font-bold text-zinc-950 tracking-tight leading-tight">Our Development Process</h2>
+          <p className="text-zinc-600 text-sm">
+            A deterministic approach from intake to support ensures predictability and zero feature creep.
+          </p>
+        </div>
+
+        <div className="grid gap-6 max-w-4xl mx-auto relative pl-6 border-l border-zinc-200">
+          {PROCESS_STEPS.map((step, index) => (
+            <div key={index} className="relative space-y-1 pb-5">
+              {/* Bullet node */}
+              <div className="absolute -left-[38px] top-0.5 h-7 w-7 rounded-full bg-zinc-950 border border-zinc-200 flex items-center justify-center text-[10px] font-bold text-white font-mono shadow-sm">
+                {step.phase}
+              </div>
+              <h3 className="text-base font-bold text-zinc-950 pl-4">{step.title}</h3>
+              <p className="text-zinc-600 text-xs leading-5 pl-4 max-w-2xl">{step.desc}</p>
             </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 7. FAQ Accordion Section */}
+      <div className="max-w-3xl mx-auto space-y-8">
+        <div className="text-center space-y-2">
+          <p className="text-[10px] uppercase tracking-widest text-zinc-400 font-bold">FAQ</p>
+          <h2 className="text-2xl font-bold text-zinc-950 tracking-tight">Frequently Asked Questions</h2>
+        </div>
+
+        <div className="space-y-3">
+          {FAQS.map((faq, index) => {
+            const isOpen = openFaqIndex === index
+            return (
+              <div 
+                key={index} 
+                className="rounded-2xl border border-zinc-200 bg-white overflow-hidden transition-all duration-150"
+              >
+                <button
+                  onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                  className="w-full flex items-center justify-between p-4.5 text-left text-zinc-900 font-bold text-sm hover:bg-zinc-50"
+                >
+                  <span>{faq.q}</span>
+                  {isOpen ? <ChevronUp className="text-zinc-800" size={16} /> : <ChevronDown className="text-zinc-400" size={16} />}
+                </button>
+                {isOpen && (
+                  <div className="p-4.5 pt-0 border-t border-zinc-100 text-zinc-600 text-xs leading-6">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* 8. Final CTA Section */}
+      <div className="relative overflow-hidden rounded-[2.5rem] border border-zinc-200 bg-white p-8 md:p-14 text-center max-w-4xl mx-auto shadow-sm">
+        <div className="space-y-6 max-w-2xl mx-auto">
+          <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900 border border-zinc-200">
+            <Award size={20} />
           </div>
-          <div className="mt-8 space-y-4 text-slate-300">
-            <p>From dairy collection to site logistics, every workflow is mapped and optimized for the data that drives decisions.</p>
-            <div className="rounded-3xl bg-slate-900/80 p-5">
-              <p className="text-sm uppercase tracking-[0.25em] text-slate-400">Outcome</p>
-              <p className="mt-2 font-semibold text-white">Faster reporting, stronger controls, and measurable operational uplift.</p>
-            </div>
+          <div className="space-y-3">
+            <h2 className="text-2xl font-extrabold text-zinc-950 tracking-tight">
+              Ready to engineer your system?
+            </h2>
+            <p className="text-zinc-600 text-sm leading-6">
+              Let's schedule a dedicated technical consulting session. No salesmen, just solutions architecture tailored to your business rules.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-1.5 rounded-full bg-zinc-950 px-6 py-3 text-xs font-semibold text-white transition hover:bg-zinc-800 shadow-sm"
+            >
+              <span>Schedule Intake Meeting</span>
+              <ArrowRight size={13} />
+            </Link>
+            <a
+              href="mailto:contact@wisdomcore.in"
+              className="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-6 py-3 text-xs font-semibold text-zinc-800 hover:bg-zinc-100 transition"
+            >
+              <Phone size={13} />
+              <span>Email Intake Team</span>
+            </a>
           </div>
         </div>
       </div>
