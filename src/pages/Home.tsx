@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   ArrowRight, Cloud, Database, ShieldCheck, Terminal, Cpu, Layers, 
   Workflow, CheckCircle, ChevronDown, ChevronUp, Star, Users, Briefcase, 
-  Settings, Award, Zap, Phone, BookOpen, Mail
+  Settings, Award, Zap, Phone, BookOpen, Mail, WifiOff, Server
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Component as EtheralShadow } from '../components/ui/etheral-shadow'
@@ -147,7 +147,7 @@ function Home() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-zinc-950 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-zinc-800 shadow-sm"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition hover:opacity-95 shadow-sm"
               >
                 <span>Book Free Consult</span>
                 <ArrowRight size={15} />
@@ -161,51 +161,100 @@ function Home() {
             </div>
           </div>
 
-          {/* Minimalist Live Dashboard Panel */}
-          <div className="panel-card relative overflow-hidden border border-zinc-200 bg-white p-6 md:p-8 space-y-6 shadow-sm">
-            <div className="flex items-center justify-between border-b border-zinc-100 pb-4">
-              <div className="flex items-center gap-2">
-                <div className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
-                <div className="h-2.5 w-2.5 rounded-full bg-zinc-200" />
-                <div className="h-2.5 w-2.5 rounded-full bg-zinc-100" />
+          {/* Animated Systems Topology Graphics Panel */}
+          <div className="panel-card relative overflow-hidden border border-zinc-200 bg-white p-6 md:p-8 space-y-6 shadow-sm flex flex-col justify-between min-h-[500px]">
+            <div>
+              <div className="flex items-center justify-between border-b border-zinc-100 pb-4 mb-4">
+                <div className="flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest font-mono">wcs-mesh-network</span>
+                </div>
+                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest font-mono">v2.0 ACTIVE</span>
               </div>
-              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest font-mono">wcs-terminal-v2.0</span>
+
+              {/* Topology Mesh Container */}
+              <div className="relative w-full h-[320px] bg-zinc-50/50 rounded-2xl border border-zinc-100 flex items-center justify-center">
+                {/* Background Grid Pattern */}
+                <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#f4f4f5_1px,transparent_1px),linear-gradient(to_bottom,#f4f4f5_1px,transparent_1px)] bg-[size:24px_24px] opacity-60" />
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#ffffff_90%)]" />
+                </div>
+
+                {/* Connection Lines & Flowing Packets */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 320">
+                  {/* Nodes link paths */}
+                  <line x1="80" y1="70" x2="200" y2="160" stroke="#e4e4e7" strokeWidth="1.5" strokeDasharray="3 3" />
+                  <line x1="320" y1="70" x2="200" y2="160" stroke="#e4e4e7" strokeWidth="1.5" />
+                  <line x1="200" y1="250" x2="200" y2="160" stroke="#e4e4e7" strokeWidth="1.5" />
+
+                  {/* Pulsing Dot Animations along paths */}
+                  <circle cx={80} cy={70} r={3.5} fill="var(--primary)" className="packet-flow-1" />
+                  <circle cx={200} cy={160} r={3.5} fill="var(--primary)" className="packet-flow-2" />
+                  <circle cx={200} cy={250} r={3.5} fill="var(--primary)" className="packet-flow-3" />
+                </svg>
+
+                {/* Nodes layout absolute positioned */}
+                {/* 1. Top-Left Node: Offline-first SQLite Cache */}
+                <div className="absolute left-[20%] top-[22%] -translate-x-1/2 -translate-y-1/2 group z-10">
+                  <div className="absolute -inset-2 rounded-full bg-amber-50 border border-amber-100 animate-ping opacity-25" />
+                  <div className="relative w-12 h-12 rounded-full border border-zinc-200 bg-white shadow-sm hover:border-amber-400 hover:scale-110 hover:shadow transition-all duration-200 flex items-center justify-center cursor-pointer">
+                    <WifiOff size={16} className="text-zinc-600 group-hover:text-amber-500 transition-colors" />
+                  </div>
+                  {/* Tooltip */}
+                  <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 bg-zinc-950 text-white text-[10px] px-2.5 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md z-20">
+                    <p className="font-bold text-center">Offline SQLite Cache</p>
+                    <p className="text-zinc-400 font-medium mt-0.5">Buffers transactions locally on network drops</p>
+                  </div>
+                </div>
+
+                {/* 2. Top-Right Node: AWS / Cloud Gateway */}
+                <div className="absolute left-[80%] top-[22%] -translate-x-1/2 -translate-y-1/2 group z-10">
+                  <div className="absolute -inset-2 rounded-full bg-blue-50 border border-blue-100 animate-ping opacity-25" />
+                  <div className="relative w-12 h-12 rounded-full border border-zinc-200 bg-white shadow-sm hover:border-blue-400 hover:scale-110 hover:shadow transition-all duration-200 flex items-center justify-center cursor-pointer">
+                    <Cloud size={16} className="text-zinc-600 group-hover:text-blue-500 transition-colors" />
+                  </div>
+                  {/* Tooltip */}
+                  <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 bg-zinc-950 text-white text-[10px] px-2.5 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md z-20">
+                    <p className="font-bold text-center">AWS API Ingress</p>
+                    <p className="text-zinc-400 font-medium mt-0.5">High-speed JWT load balanced routing</p>
+                  </div>
+                </div>
+
+                {/* 3. Central Node: Primary PostgreSQL Cluster */}
+                <div className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 group z-10">
+                  <div className="absolute -inset-3 rounded-full bg-emerald-50 border border-emerald-100 animate-pulse opacity-40" />
+                  <div className="relative w-16 h-16 rounded-full border border-zinc-300 bg-zinc-950 shadow-md hover:border-emerald-400 hover:scale-105 transition-all duration-200 flex items-center justify-center cursor-pointer">
+                    <Database size={22} className="text-white group-hover:text-emerald-400 transition-colors" />
+                    <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white animate-pulse" />
+                  </div>
+                  {/* Tooltip */}
+                  <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 bg-zinc-950 text-white text-[10px] px-2.5 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md z-20">
+                    <p className="font-bold text-center text-emerald-400">PostgreSQL Primary Cluster</p>
+                    <p className="text-zinc-400 font-medium mt-0.5">Supabase cloud replication node</p>
+                  </div>
+                </div>
+
+                {/* 4. Bottom Node: Client Applications / Web Portal */}
+                <div className="absolute left-[50%] top-[78%] -translate-x-1/2 -translate-y-1/2 group z-10">
+                  <div className="absolute -inset-2 rounded-full bg-indigo-50 border border-indigo-100 animate-ping opacity-25" />
+                  <div className="relative w-12 h-12 rounded-full border border-zinc-200 bg-white shadow-sm hover:border-indigo-400 hover:scale-110 hover:shadow transition-all duration-200 flex items-center justify-center cursor-pointer">
+                    <Workflow size={16} className="text-zinc-600 group-hover:text-indigo-500 transition-colors" />
+                  </div>
+                  {/* Tooltip */}
+                  <div className="absolute top-full mt-3 left-1/2 -translate-x-1/2 bg-zinc-950 text-white text-[10px] px-2.5 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md z-20">
+                    <p className="font-bold text-center">React Client Portal</p>
+                    <p className="text-zinc-400 font-medium mt-0.5">Real-time stats dashboard & lead logger</p>
+                  </div>
+                </div>
+
+              </div>
             </div>
 
-            <div className="space-y-4 font-mono text-xs text-zinc-600">
-              <div className="flex items-start gap-2">
-                <span className="text-zinc-400">$</span>
-                <p className="text-zinc-900 font-medium">wcs system --initialize --db=SupabaseClient</p>
-              </div>
-              <div className="flex items-start gap-2 text-zinc-800 bg-zinc-50 p-2 rounded-lg border border-zinc-100">
-                <span>✓</span>
-                <p className="leading-5">Connection established with secondary replication cluster (supabase.co)</p>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="text-zinc-400">$</span>
-                <p className="text-zinc-900 font-medium">wcs monitor --target=all-endpoints</p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              <div className="rounded-2xl bg-zinc-50 p-4 border border-zinc-200">
-                <p className="text-[9px] uppercase tracking-wider text-zinc-400 font-bold">API Uptime</p>
-                <p className="text-lg font-bold text-zinc-900 mt-1">99.998%</p>
-              </div>
-              <div className="rounded-2xl bg-zinc-50 p-4 border border-zinc-200">
-                <p className="text-[9px] uppercase tracking-wider text-zinc-400 font-bold">Response Latency</p>
-                <p className="text-lg font-bold text-zinc-950 mt-1">118ms</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-3 bg-zinc-50 p-4 rounded-2xl border border-zinc-200">
-              <div className="h-9 w-9 rounded-xl bg-zinc-950 flex items-center justify-center text-white">
-                <Workflow size={16} />
-              </div>
-              <div>
-                <p className="text-xs font-bold text-zinc-900">Active Deployment</p>
-                <p className="text-[11px] text-zinc-500 mt-0.5 font-medium">Construction LogiBuild v2.1.2 synced</p>
-              </div>
+            {/* Graphics Footer */}
+            <div className="border-t border-zinc-100 pt-4 mt-2">
+              <p className="text-[10.5px] text-zinc-400 font-mono text-center leading-relaxed">
+                ⚡ Fully connected active system topography. Hover over nodes to inspect details.
+              </p>
             </div>
           </div>
         </div>
@@ -439,7 +488,7 @@ function Home() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-1.5 rounded-full bg-zinc-950 px-6 py-3 text-xs font-semibold text-white transition hover:bg-zinc-800 shadow-sm"
+              className="inline-flex items-center gap-1.5 rounded-full bg-primary px-6 py-3 text-xs font-semibold text-primary-foreground transition hover:opacity-95 shadow-sm"
             >
               <span>Schedule Intake Meeting</span>
               <ArrowRight size={13} />

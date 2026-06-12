@@ -44,7 +44,7 @@ function NavBar() {
           </Link>
           <Link
             to="/contact"
-            className="rounded-full bg-zinc-950 px-4 py-2 text-sm font-semibold text-white hover:bg-zinc-800 transition shadow-sm"
+            className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 transition shadow-sm"
           >
             Schedule consult
           </Link>
@@ -99,7 +99,7 @@ function NavBar() {
                 <Link
                   to="/contact"
                   onClick={() => setIsOpen(false)}
-                  className="w-full flex items-center justify-center rounded-full bg-zinc-950 py-2.5 text-xs font-semibold text-white hover:bg-zinc-800 transition shadow-sm"
+                  className="w-full flex items-center justify-center rounded-full bg-primary py-2.5 text-xs font-semibold text-primary-foreground hover:opacity-90 transition shadow-sm"
                 >
                   Schedule consult
                 </Link>

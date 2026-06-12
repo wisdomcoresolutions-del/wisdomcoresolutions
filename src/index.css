@@ -1,11 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   color-scheme: light;
-  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  background-color: #fafafa;
+  font-family: 'Roboto', ui-sans-serif, system-ui, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+
+  --card: #ffffff;
+  --ring: #8b5cf6;
+  --input: #e0e7ff;
+  --muted: #f5f3ff;
+  --accent: #dbeafe;
+  --border: #e0e7ff;
+  --radius: 0.625rem;
+  --chart-1: #8b5cf6;
+  --chart-2: #7c3aed;
+  --chart-3: #6d28d9;
+  --chart-4: #5b21b6;
+  --chart-5: #4c1d95;
+  --popover: #ffffff;
+  --primary: #8b5cf6;
+  --sidebar: #f5f3ff;
+  --font-mono: Fira Code, monospace;
+  --font-sans: Roboto, sans-serif;
+  --secondary: #f3f0ff;
+  --background: #ffffff;
+  --font-serif: Playfair Display, serif;
+  --foreground: #312e81;
+  --destructive: #ef4444;
+  --shadow-blur: 4px;
+  --shadow-color: hsl(255 86% 66%);
+  --sidebar-ring: #8b5cf6;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.2;
+  --sidebar-accent: #dbeafe;
+  --sidebar-border: #e0e7ff;
+  --card-foreground: #312e81;
+  --shadow-offset-x: 2px;
+  --shadow-offset-y: 2px;
+  --sidebar-primary: #8b5cf6;
+  --muted-foreground: #7c3aed;
+  --accent-foreground: #1e40af;
+  --popover-foreground: #312e81;
+  --primary-foreground: #ffffff;
+  --sidebar-foreground: #312e81;
+  --secondary-foreground: #4338ca;
+  --destructive-foreground: #ffffff;
+  --sidebar-accent-foreground: #1e40af;
+  --sidebar-primary-foreground: #ffffff;
+}
+
+.dark {
+  color-scheme: dark;
+  --card: #1e1b4b;
+  --ring: #8b5cf6;
+  --input: #2e1065;
+  --muted: #1e1b4b;
+  --accent: #4338ca;
+  --border: #2e1065;
+  --radius: 0.625rem;
+  --chart-1: #a78bfa;
+  --chart-2: #8b5cf6;
+  --chart-3: #7c3aed;
+  --chart-4: #6d28d9;
+  --chart-5: #5b21b6;
+  --popover: #1e1b4b;
+  --primary: #8b5cf6;
+  --sidebar: #0f172a;
+  --secondary: #1e1b4b;
+  --background: #0f172a;
+  --foreground: #e0e7ff;
+  --destructive: #ef4444;
+  --sidebar-ring: #8b5cf6;
+  --sidebar-accent: #4338ca;
+  --sidebar-border: #2e1065;
+  --card-foreground: #e0e7ff;
+  --sidebar-primary: #8b5cf6;
+  --muted-foreground: #c4b5fd;
+  --accent-foreground: #e0e7ff;
+  --popover-foreground: #e0e7ff;
+  --primary-foreground: #ffffff;
+  --sidebar-foreground: #e0e7ff;
+  --secondary-foreground: #e0e7ff;
+  --destructive-foreground: #ffffff;
+  --sidebar-accent-foreground: #e0e7ff;
+  --sidebar-primary-foreground: #ffffff;
 }
 
 html {
@@ -14,13 +97,13 @@ html {
 
 body {
   min-height: 100vh;
-  background-color: #fafafa;
-  color: #09090b;
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 ::selection {
-  background: rgba(9, 9, 11, 0.08);
-  color: #09090b;
+  background: var(--accent);
+  color: var(--foreground);
 }
 
 button,
@@ -32,6 +115,32 @@ select {
 
 textarea {
   resize: vertical;
+}
+
+/* Systems sync packet animations */
+@keyframes flow1 {
+  0% { transform: translate(0px, 0px); }
+  100% { transform: translate(120px, 90px); }
+}
+@keyframes flow2 {
+  0% { transform: translate(0px, 0px); }
+  100% { transform: translate(120px, -90px); }
+}
+@keyframes flow3 {
+  0% { transform: translate(0px, 0px); }
+  100% { transform: translate(0px, -90px); }
+}
+
+.packet-flow-1 {
+  animation: flow1 3s infinite linear;
+}
+.packet-flow-2 {
+  animation: flow2 2.2s infinite linear;
+  animation-delay: 0.5s;
+}
+.packet-flow-3 {
+  animation: flow3 2.5s infinite linear;
+  animation-delay: 1.2s;
 }
 
 @layer utilities {
