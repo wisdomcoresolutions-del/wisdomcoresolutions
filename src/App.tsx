@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Footer from './components/Footer'
 import NavBar from './components/NavBar'
+import WhatsAppFloat from './components/WhatsAppFloat'
 import Home from './pages/Home'
 import About from './pages/About'
 import Services from './pages/Services'
@@ -42,6 +43,7 @@ function App() {
         </AnimatePresence>
       </main>
       <Footer />
+      <WhatsAppFloat />
     </div>
   )
 }
