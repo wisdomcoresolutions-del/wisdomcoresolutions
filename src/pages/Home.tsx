@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { 
   ArrowRight, Cloud, Database, ShieldCheck, Terminal, Cpu, Layers, 
   Workflow, CheckCircle, ChevronDown, ChevronUp, Star, Users, Briefcase, 
-  Settings, Award, Zap, Phone, BookOpen
+  Settings, Award, Zap, Phone, BookOpen, Mail
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Component as EtheralShadow } from '../components/ui/etheral-shadow'
@@ -438,10 +438,10 @@ function Home() {
               <ArrowRight size={13} />
             </Link>
             <a
-              href="mailto:contact@wisdomcore.in"
+              href="mailto:wisdomcoresolutions@gmail.com"
               className="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-6 py-3 text-xs font-semibold text-zinc-800 hover:bg-zinc-100 transition"
             >
-              <Phone size={13} />
+              <Mail size={13} />
               <span>Email Intake Team</span>
             </a>
           </div>
