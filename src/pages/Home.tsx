@@ -7,6 +7,7 @@ import {
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Component as EtheralShadow } from '../components/ui/etheral-shadow'
+import SEOHead from '../components/SEOHead'
 
 const STATS = [
   { value: '99.9%', label: 'Uptime Architecture SLA' },
@@ -108,6 +109,12 @@ function Home() {
 
   return (
     <section className="space-y-20 py-6">
+      <SEOHead
+        title="WisdomCore Solutions | Custom ERP, Cloud & Enterprise Software India"
+        description="WisdomCore Solutions engineers custom ERP systems, cloud infrastructure, AI automation, and database solutions for manufacturing, healthcare, dairy, construction and retail enterprises across India."
+        keywords="custom ERP India, enterprise software company India, cloud solutions, database engineering India, AI automation software, hospital management system, dairy ERP software, construction ERP, WisdomCore Solutions"
+        canonical="/"
+      />
       {/* 1. Hero Section with off-white card layout */}
       <div className="relative overflow-hidden rounded-[2.5rem] border border-zinc-200 bg-white p-8 md:p-16 shadow-sm min-h-[600px] flex items-center">
         <EtheralShadow

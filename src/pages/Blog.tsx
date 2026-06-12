@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { isSupabaseConfigured, supabase } from '../lib/supabaseClient'
 import { BookOpen, Calendar, ArrowRight, X, AlertCircle } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import SEOHead from '../components/SEOHead'
 
 interface BlogPost {
   id: string | number
@@ -99,6 +100,13 @@ function Blog() {
 
   return (
     <section className="space-y-12 py-10">
+      <SEOHead
+        title="WisdomCore Technical Ledger | ERP, Cloud & AI Engineering Blog"
+        description="Read in-depth engineering insights, architecture case studies, and backend optimization strategies from WisdomCore Solutions — India's premier enterprise software consultancy."
+        keywords="ERP blog India, custom software development blog, cloud architecture insights, database optimization, AI engineering, enterprise software blog, WisdomCore blog"
+        canonical="/blog"
+        ogType="website"
+      />
       {/* Header */}
       <div className="space-y-4 max-w-4xl">
         <p className="text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold">Engineering Insights</p>

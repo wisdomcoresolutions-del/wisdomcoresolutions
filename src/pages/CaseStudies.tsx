@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Briefcase, Layers, Rocket, CheckCircle, ArrowRight, Star, Clock } from 'lucide-react'
+import SEOHead from '../components/SEOHead'
 
 const FILTERS = ['All', 'ERP', 'Web', 'Mobile', 'AI']
 
@@ -61,6 +62,12 @@ function CaseStudies() {
 
   return (
     <section className="space-y-12 py-10">
+      <SEOHead
+        title="Case Studies | Enterprise ERP & Software Projects | WisdomCore Solutions"
+        description="Explore WisdomCore Solutions' enterprise project case studies — from dairy ERP systems and hospital management platforms to AI automation and cloud infrastructure deployments across India."
+        keywords="ERP case study India, software project portfolio, dairy management system, hospital software India, construction ERP case study, enterprise software projects, WisdomCore portfolio"
+        canonical="/case-studies"
+      />
       {/* Page Header */}
       <div className="space-y-4 max-w-4xl">
         <p className="text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold">The Trust Engine</p>

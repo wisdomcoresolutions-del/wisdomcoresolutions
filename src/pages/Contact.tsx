@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { isSupabaseConfigured, supabase } from '../lib/supabaseClient'
 import { industryOptions } from '../data/content'
 import { Calculator, Zap, Calendar, Bot, Shield, CreditCard, BarChart, WifiOff, FileText, ArrowRight } from 'lucide-react'
+import SEOHead from '../components/SEOHead'
 
 const BASE_PRICES: Record<string, number> = {
   ERP: 600000,
@@ -148,6 +149,12 @@ Brief Details: [Please describe your business process here...]`
 
   return (
     <section className="space-y-12 py-10">
+      <SEOHead
+        title="Contact WisdomCore Solutions | Get a Free ERP & Software Consultation"
+        description="Schedule a free technical consultation with WisdomCore Solutions. Get a custom ERP, cloud, AI, or mobile app scope estimate and submit your project inquiry to our engineering team."
+        keywords="contact software company India, free ERP consultation, custom software quote India, hire software developers India, enterprise software inquiry, WisdomCore contact"
+        canonical="/contact"
+      />
       <div className="space-y-4 text-center max-w-4xl mx-auto">
         <p className="text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold">Lead Acceleration Hub</p>
         <h1 className="text-4xl font-extrabold text-zinc-950 sm:text-5xl leading-tight tracking-tight">
