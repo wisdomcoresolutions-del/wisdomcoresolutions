@@ -4,7 +4,7 @@ function TermsOfService() {
   const lastUpdated = 'June 12, 2026'
 
   return (
-    <section className="py-10 max-w-4xl mx-auto space-y-10">
+    <section className="py-8 md:py-16 max-w-4xl mx-auto space-y-10">
       <SEOHead
         title="Terms of Service | WisdomCore Solutions"
         description="Read WisdomCore Solutions' Terms of Service to understand the conditions governing use of our website and software development services."
@@ -13,16 +13,16 @@ function TermsOfService() {
       />
 
       <div className="space-y-3">
-        <p className="text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold">Legal</p>
-        <h1 className="text-4xl font-extrabold text-zinc-950 tracking-tight">Terms of Service</h1>
-        <p className="text-sm text-zinc-500">Last updated: {lastUpdated}</p>
+        <p className="text-xs uppercase tracking-[0.25em] text-blue-600 dark:text-cyan-400 font-bold">Legal</p>
+        <h1 className="text-4xl font-extrabold text-zinc-950 dark:text-white tracking-tight">Terms of Service</h1>
+        <p className="text-xs text-zinc-500 dark:text-zinc-400">Last updated: {lastUpdated}</p>
       </div>
 
-      <div className="rounded-[2rem] border border-zinc-200 bg-white p-8 md:p-12 shadow-sm space-y-10 text-zinc-700 text-sm leading-7">
+      <div className="rounded-[2rem] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 p-8 md:p-12 shadow-sm space-y-10 text-zinc-650 dark:text-zinc-300 text-xs md:text-sm leading-relaxed">
 
         <div className="space-y-3">
           <p>
-            These Terms of Service ("Terms") govern your access to and use of the website <strong>wisdomcoresolutions.store</strong> and any services offered by <strong>WisdomCore Solutions</strong>, headquartered in Sirsa, Haryana, India ("Company", "we", "our", or "us").
+            These Terms of Service ("Terms") govern your access to and use of the website <strong className="text-zinc-905 dark:text-white">wisdomcoresolutions.store</strong> and any services offered by <strong className="text-zinc-905 dark:text-white">WisdomCore Solutions</strong>, headquartered in Sirsa, Haryana, India ("Company", "we", "our", or "us").
           </p>
           <p>
             By accessing or using our website, you agree to be bound by these Terms. If you do not agree, please do not use our website or services.
@@ -78,7 +78,7 @@ function TermsOfService() {
 
         <Section title="6. Contact Form & Submissions">
           <p>
-            By submitting an inquiry through our contact form, you consent to our team contacting you via email or phone regarding your project. Submitted information is handled in accordance with our <a href="/privacy-policy" className="text-zinc-900 font-semibold hover:underline">Privacy Policy</a>. We do not share your inquiry details with third parties without your consent.
+            By submitting an inquiry through our contact form, you consent to our team contacting you via email or phone regarding your project. Submitted information is handled in accordance with our <a href="/privacy-policy" className="text-blue-600 dark:text-cyan-400 font-semibold hover:underline">Privacy Policy</a>. We do not share your inquiry details with third parties without your consent.
           </p>
         </Section>
 
@@ -96,11 +96,11 @@ function TermsOfService() {
 
         <Section title="9. Contact Us">
           <p>For any questions about these Terms of Service, please reach out:</p>
-          <div className="mt-4 p-5 rounded-2xl bg-zinc-50 border border-zinc-200 space-y-1.5">
+          <div className="mt-4 p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 space-y-1.5 text-xs md:text-sm">
             <p><strong>WisdomCore Solutions</strong></p>
             <p>Sirsa, Haryana, India</p>
-            <p>Email: <a href="mailto:wisdomcoresolutions@gmail.com" className="text-zinc-900 font-semibold hover:underline">wisdomcoresolutions@gmail.com</a></p>
-            <p>Phone: <a href="tel:+919050524678" className="text-zinc-900 font-semibold hover:underline">+91 9050524678</a></p>
+            <p>Email: <a href="mailto:wisdomcoresolutions@gmail.com" className="text-blue-600 dark:text-cyan-400 font-semibold hover:underline">wisdomcoresolutions@gmail.com</a></p>
+            <p>Phone: <a href="tel:+919050524678" className="text-blue-600 dark:text-cyan-400 font-semibold hover:underline">+91 9050524678</a></p>
           </div>
         </Section>
 
@@ -112,7 +112,7 @@ function TermsOfService() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="space-y-3">
-      <h2 className="text-base font-bold text-zinc-950">{title}</h2>
+      <h2 className="text-base font-bold text-zinc-950 dark:text-white">{title}</h2>
       {children}
     </div>
   )

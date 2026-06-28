@@ -4,7 +4,7 @@ function PrivacyPolicy() {
   const lastUpdated = 'June 12, 2026'
 
   return (
-    <section className="py-10 max-w-4xl mx-auto space-y-10">
+    <section className="py-8 md:py-16 max-w-4xl mx-auto space-y-10">
       <SEOHead
         title="Privacy Policy | WisdomCore Solutions"
         description="Read WisdomCore Solutions' Privacy Policy to understand how we collect, use, and protect your personal information when you use our website or services."
@@ -14,16 +14,16 @@ function PrivacyPolicy() {
 
       {/* Header */}
       <div className="space-y-3">
-        <p className="text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold">Legal</p>
-        <h1 className="text-4xl font-extrabold text-zinc-950 tracking-tight">Privacy Policy</h1>
-        <p className="text-sm text-zinc-500">Last updated: {lastUpdated}</p>
+        <p className="text-xs uppercase tracking-[0.25em] text-blue-600 dark:text-cyan-400 font-bold">Legal</p>
+        <h1 className="text-4xl font-extrabold text-zinc-950 dark:text-white tracking-tight">Privacy Policy</h1>
+        <p className="text-xs text-zinc-500 dark:text-zinc-400">Last updated: {lastUpdated}</p>
       </div>
 
-      <div className="rounded-[2rem] border border-zinc-200 bg-white p-8 md:p-12 shadow-sm space-y-10 text-zinc-700 text-sm leading-7">
+      <div className="rounded-[2rem] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 p-8 md:p-12 shadow-sm space-y-10 text-zinc-650 dark:text-zinc-300 text-xs md:text-sm leading-relaxed">
 
         <div className="space-y-3">
           <p>
-            WisdomCore Solutions ("Company", "we", "our", or "us"), headquartered in <strong>Sirsa, Haryana, India</strong>, operates the website <strong>wisdomcoresolutions.store</strong>. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or engage with our services.
+            WisdomCore Solutions ("Company", "we", "our", or "us"), headquartered in <strong className="text-zinc-900 dark:text-white">Sirsa, Haryana, India</strong>, operates the website <strong className="text-zinc-900 dark:text-white">wisdomcoresolutions.store</strong>. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or engage with our services.
           </p>
           <p>
             By using our website, you consent to the data practices described in this policy. If you do not agree, please discontinue use of our website.
@@ -113,12 +113,12 @@ function PrivacyPolicy() {
 
         <Section title="10. Contact Us">
           <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:</p>
-          <div className="mt-4 p-5 rounded-2xl bg-zinc-50 border border-zinc-200 space-y-1.5">
+          <div className="mt-4 p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 space-y-1.5 text-xs md:text-sm">
             <p><strong>WisdomCore Solutions</strong></p>
             <p>Sirsa, Haryana, India</p>
-            <p>Email: <a href="mailto:wisdomcoresolutions@gmail.com" className="text-zinc-900 font-semibold hover:underline">wisdomcoresolutions@gmail.com</a></p>
-            <p>Phone: <a href="tel:+919050524678" className="text-zinc-900 font-semibold hover:underline">+91 9050524678</a></p>
-            <p>Website: <a href="https://wisdomcoresolutions.store" className="text-zinc-900 font-semibold hover:underline">wisdomcoresolutions.store</a></p>
+            <p>Email: <a href="mailto:wisdomcoresolutions@gmail.com" className="text-blue-600 dark:text-cyan-400 font-semibold hover:underline">wisdomcoresolutions@gmail.com</a></p>
+            <p>Phone: <a href="tel:+919050524678" className="text-blue-600 dark:text-cyan-400 font-semibold hover:underline">+91 9050524678</a></p>
+            <p>Website: <a href="https://wisdomcoresolutions.store" className="text-blue-600 dark:text-cyan-400 font-semibold hover:underline">wisdomcoresolutions.store</a></p>
           </div>
         </Section>
 
@@ -130,7 +130,7 @@ function PrivacyPolicy() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="space-y-3">
-      <h2 className="text-base font-bold text-zinc-950">{title}</h2>
+      <h2 className="text-base font-bold text-zinc-950 dark:text-white">{title}</h2>
       {children}
     </div>
   )

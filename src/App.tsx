@@ -17,7 +17,7 @@ function App() {
   const location = useLocation()
 
   return (
-    <div className="min-h-screen bg-core-950 text-zinc-900">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 transition-colors duration-350">
       <NavBar />
       <main className="mx-auto max-w-7xl px-6 py-8 xl:px-0">
         <AnimatePresence mode="wait">

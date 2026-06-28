@@ -126,7 +126,7 @@ function Blog() {
   }
 
   return (
-    <section className="space-y-12 py-10">
+    <section className="space-y-16 py-8 md:py-16">
       <SEOHead
         title="WisdomCore Technical Ledger | ERP, Cloud & AI Engineering Blog"
         description="Read in-depth engineering insights, architecture case studies, and backend optimization strategies from WisdomCore Solutions — India's premier enterprise software consultancy."
@@ -136,53 +136,53 @@ function Blog() {
       />
       {/* Header */}
       <div className="space-y-4 max-w-4xl">
-        <p className="text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold">Engineering Insights</p>
-        <h1 className="text-4xl font-extrabold text-zinc-950 sm:text-5xl leading-tight tracking-tight">
+        <p className="text-xs uppercase tracking-[0.25em] text-blue-600 dark:text-cyan-400 font-bold">Ledger Notes</p>
+        <h1 className="text-4xl font-extrabold text-zinc-950 dark:text-white sm:text-5xl leading-tight tracking-tight">
           WisdomCore Technical Ledger
         </h1>
-        <p className="text-base text-zinc-650 leading-7">
+        <p className="text-sm md:text-base text-zinc-650 dark:text-zinc-400 leading-relaxed">
           Deep-dive architecture notes, performance engineering reports, and backend optimization strategies from our active client implementations.
         </p>
       </div>
 
       {dbError && (
-        <div className="flex items-center gap-3 p-4 rounded-2xl bg-zinc-50 border border-zinc-200 text-zinc-700 text-xs font-semibold max-w-xl">
-          <AlertCircle size={16} className="text-zinc-500 shrink-0" />
-          <span>Notice: {dbError} Showing local cached architecture guides.</span>
+        <div className="flex items-center gap-3 p-4 rounded-2xl bg-zinc-55/10 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-350 text-xs font-semibold max-w-xl">
+          <AlertCircle size={16} className="text-blue-600 dark:text-cyan-455 shrink-0" />
+          <span>Notice: Using local cached system guides.</span>
         </div>
       )}
 
       {loading ? (
-        <div className="text-zinc-650 text-sm font-semibold">Resolving ledger files...</div>
+        <div className="text-zinc-650 dark:text-zinc-400 text-sm font-semibold">Resolving ledger files...</div>
       ) : (
         <div className="grid gap-8 md:grid-cols-2">
           {posts.map((post) => (
             <article
               key={post.id}
-              className="p-6 md:p-8 rounded-[2rem] border border-zinc-200 bg-white flex flex-col justify-between space-y-6 shadow-sm hover:border-zinc-350 transition-all duration-150"
+              className="p-6 md:p-8 rounded-[2rem] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 flex flex-col justify-between space-y-6 shadow-sm hover:border-zinc-350 dark:hover:border-zinc-700 transition-all duration-150"
             >
               <div className="space-y-5">
-                <div className="flex items-center justify-between text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                  <span className="bg-zinc-50 border border-zinc-200 px-2.5 py-1 rounded-full text-zinc-600">
+                <div className="flex items-center justify-between text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">
+                  <span className="bg-zinc-55 dark:bg-zinc-850 border border-zinc-200 dark:border-zinc-800 px-3 py-1 rounded-full text-zinc-650 dark:text-zinc-300 font-bold tracking-wider">
                     {post.category}
                   </span>
                   <span>{post.read_time || '5 min read'}</span>
                 </div>
 
                 <div className="space-y-2">
-                  <h2 className="text-xl font-bold text-zinc-950 leading-tight tracking-tight">{post.title}</h2>
-                  <p className="text-zinc-650 text-xs leading-5">{post.subtitle || post.excerpt}</p>
+                  <h2 className="text-xl font-bold text-zinc-950 dark:text-white leading-tight tracking-tight">{post.title}</h2>
+                  <p className="text-zinc-650 dark:text-zinc-400 text-xs leading-relaxed line-clamp-3">{post.subtitle || post.excerpt}</p>
                 </div>
               </div>
 
-              <div className="border-t border-zinc-100 pt-4 flex items-center justify-between">
-                <div className="flex items-center gap-2 text-[11px] text-zinc-500 font-medium">
-                  <Calendar size={13} />
+              <div className="border-t border-zinc-150 dark:border-zinc-800/80 pt-4 flex items-center justify-between">
+                <div className="flex items-center gap-2 text-[10px] text-zinc-500 dark:text-zinc-450 font-bold font-mono">
+                  <Calendar size={13} className="text-blue-650 dark:text-cyan-400" />
                   <span>{(post.published_at || post.created_at)?.split('T')[0] || 'June 2026'}</span>
                 </div>
                 <button
                   onClick={() => handleOpenPost(post)}
-                  className="flex items-center gap-1.5 text-xs font-bold text-zinc-900 hover:text-zinc-800"
+                  className="flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-cyan-400 hover:opacity-90"
                 >
                   <span>Read Article</span>
                   <ArrowRight size={13} />
@@ -200,7 +200,7 @@ function Blog() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/40 backdrop-blur-sm p-4 md:p-6"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/60 backdrop-blur-md p-4 md:p-6"
             onClick={handleClosePost}
           >
             <motion.div
@@ -208,28 +208,28 @@ function Blog() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.96, opacity: 0 }}
               transition={{ duration: 0.18 }}
-              className="w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-[2.5rem] border border-zinc-200 bg-white p-6 md:p-10 space-y-6 shadow-lg relative"
+              className="w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 md:p-10 space-y-6 shadow-2xl relative"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
                 onClick={handleClosePost}
-                className="absolute top-5 right-5 h-8 w-8 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50 flex items-center justify-center text-zinc-650 transition"
+                className="absolute top-5 right-5 h-8 w-8 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-850 hover:bg-zinc-50 dark:hover:bg-zinc-800 flex items-center justify-center text-zinc-650 dark:text-zinc-300 transition"
               >
                 <X size={15} />
               </button>
 
               <div className="space-y-4">
-                <div className="flex items-center gap-4 text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                  <span className="bg-zinc-50 border border-zinc-200 px-2.5 py-1 rounded-full text-zinc-600">
+                <div className="flex items-center gap-4 text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">
+                  <span className="bg-zinc-55 dark:bg-zinc-850 border border-zinc-200 dark:border-zinc-800 px-3 py-1 rounded-full text-zinc-650 dark:text-zinc-300">
                     {selectedPost.category}
                   </span>
                   <span>{selectedPost.read_time || '5 min read'}</span>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-zinc-950 tracking-tight leading-tight">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight leading-tight">
                   {selectedPost.title}
                 </h2>
-                <p className="text-zinc-600 text-sm leading-6 italic">
+                <p className="text-zinc-650 dark:text-zinc-305 text-xs md:text-sm leading-relaxed italic">
                   {selectedPost.subtitle || selectedPost.excerpt}
                 </p>
               </div>
@@ -244,16 +244,16 @@ function Blog() {
                 const shareOnFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`
 
                 return (
-                  <div className="flex flex-wrap items-center gap-2.5 py-4 border-y border-zinc-100 text-xs">
-                    <span className="text-zinc-400 font-bold uppercase tracking-wider flex items-center gap-1.5 mr-1.5">
-                      <Share2 size={13} /> Share
+                  <div className="flex flex-wrap items-center gap-2.5 py-4 border-y border-zinc-150 dark:border-zinc-800/80 text-xs">
+                    <span className="text-zinc-400 dark:text-zinc-500 font-extrabold uppercase tracking-wider flex items-center gap-1.5 mr-1.5">
+                      <Share2 size={13} className="text-blue-600 dark:text-cyan-400" /> Share
                     </span>
                     
                     <a
                       href={shareOnWhatsApp}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 transition font-medium"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-emerald-200 dark:border-emerald-900/30 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-800 dark:text-emerald-400 hover:bg-emerald-100/80 transition font-bold"
                     >
                       WhatsApp
                     </a>
@@ -262,7 +262,7 @@ function Blog() {
                       href={shareOnLinkedIn}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-blue-800 hover:bg-blue-100 transition font-medium"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-blue-200 dark:border-blue-900/30 bg-blue-50 dark:bg-blue-950/20 text-blue-800 dark:text-blue-400 hover:bg-blue-100/80 transition font-bold"
                     >
                       LinkedIn
                     </a>
@@ -271,7 +271,7 @@ function Blog() {
                       href={shareOnTwitter}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-200 bg-zinc-50 text-zinc-800 hover:bg-zinc-100 transition font-medium"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-850 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition font-bold"
                     >
                       Twitter / X
                     </a>
@@ -280,7 +280,7 @@ function Blog() {
                       href={shareOnFacebook}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-800 hover:bg-indigo-100 transition font-medium"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-indigo-200 dark:border-indigo-900/30 bg-indigo-50 dark:bg-indigo-950/20 text-indigo-800 dark:text-indigo-400 hover:bg-indigo-100/80 transition font-bold"
                     >
                       Facebook
                     </a>
@@ -291,12 +291,12 @@ function Blog() {
                         setCopied(true)
                         setTimeout(() => setCopied(false), 2000)
                       }}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-50 transition font-medium sm:ml-auto"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-850 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition font-bold sm:ml-auto"
                     >
                       {copied ? (
                         <>
-                          <Check size={12} className="text-emerald-600" />
-                          <span className="text-emerald-700">Copied!</span>
+                          <Check size={12} className="text-emerald-600 dark:text-emerald-400" />
+                          <span className="text-emerald-700 dark:text-emerald-400">Copied!</span>
                         </>
                       ) : (
                         <>
@@ -310,13 +310,13 @@ function Blog() {
               })()}
 
               {selectedPost.metrics && (
-                <div className="p-4 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-900 text-xs font-bold">
+                <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950/30 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 text-xs font-bold font-mono">
                   📊 Metrics Achieved: {selectedPost.metrics}
                 </div>
               )}
 
-              <div className="border-t border-zinc-100 pt-6">
-                <p className="text-zinc-800 text-sm leading-7 whitespace-pre-wrap font-normal">
+              <div className="border-t border-zinc-150 dark:border-zinc-800/80 pt-6">
+                <p className="text-zinc-850 dark:text-zinc-300 text-xs md:text-sm leading-relaxed whitespace-pre-wrap font-medium">
                   {selectedPost.content}
                 </p>
               </div>

@@ -25,16 +25,16 @@ interface LeadEntry {
 function Portal() {
   if (!isSupabaseConfigured) {
     return (
-      <section className="space-y-10 py-10">
+      <section className="space-y-10 py-8 md:py-16">
         <div className="space-y-4">
-          <p className="text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold">Client Portal</p>
-          <h1 className="text-4xl font-extrabold text-zinc-950 tracking-tight">Secure admin console for blog and lead management.</h1>
-          <p className="max-w-3xl text-base text-zinc-650 leading-7">
+          <p className="text-xs uppercase tracking-[0.25em] text-blue-600 dark:text-cyan-400 font-bold">Client Portal</p>
+          <h1 className="text-4xl font-extrabold text-zinc-950 dark:text-white tracking-tight">Secure admin console.</h1>
+          <p className="max-w-3xl text-sm md:text-base text-zinc-650 dark:text-zinc-400 leading-relaxed">
             Supabase is not configured yet. Create a local `.env` file with your `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`, then restart the dev server.
           </p>
         </div>
-        <div className="glass-card rounded-[2rem] border border-zinc-200 p-8 bg-white shadow-sm">
-          <p className="text-zinc-850 font-medium">Without Supabase configuration, the portal cannot be initialized.</p>
+        <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 p-8 bg-white dark:bg-zinc-900/30 shadow-sm">
+          <p className="text-zinc-850 dark:text-zinc-300 text-xs font-semibold">Without Supabase configuration, the portal cannot be initialized.</p>
         </div>
       </section>
     )
@@ -52,16 +52,16 @@ function Portal() {
 
   if (!isSupabaseConfigured || !supabase) {
     return (
-      <section className="space-y-10 py-10">
+      <section className="space-y-10 py-8 md:py-16">
         <div className="space-y-4">
-          <p className="text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold">Client Portal</p>
-          <h1 className="text-4xl font-extrabold text-zinc-950 tracking-tight">Secure admin console for blog and lead management.</h1>
-          <p className="max-w-3xl text-base text-zinc-650 leading-7">
+          <p className="text-xs uppercase tracking-[0.25em] text-blue-600 dark:text-cyan-400 font-bold">Client Portal</p>
+          <h1 className="text-4xl font-extrabold text-zinc-950 dark:text-white tracking-tight">Secure admin console.</h1>
+          <p className="max-w-3xl text-sm md:text-base text-zinc-650 dark:text-zinc-400 leading-relaxed">
             Supabase is not configured yet. Create a local `.env` file with your `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`, then restart the dev server.
           </p>
         </div>
-        <div className="glass-card rounded-[2rem] border border-zinc-200 p-8 bg-white shadow-sm">
-          <p className="text-zinc-850 font-medium">Without Supabase configuration, the portal cannot be initialized.</p>
+        <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 p-8 bg-white dark:bg-zinc-900/30 shadow-sm">
+          <p className="text-zinc-850 dark:text-zinc-300 text-xs font-semibold">Without Supabase configuration, the portal cannot be initialized.</p>
         </div>
       </section>
     )
@@ -70,7 +70,7 @@ function Portal() {
   const client = supabase
 
   useEffect(() => {
-    const sessionData = client.auth.getSession().then(({ data }) => {
+    client.auth.getSession().then(({ data }) => {
       setSession(data.session)
     })
 
@@ -145,82 +145,82 @@ function Portal() {
   }), [blogs, leads])
 
   return (
-    <section className="space-y-10 py-10">
+    <section className="space-y-10 py-8 md:py-16">
       <div className="space-y-4">
-        <p className="text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold">Client Portal</p>
-        <h1 className="text-4xl font-extrabold text-zinc-950 tracking-tight">Secure admin console for blog and lead management.</h1>
-        <p className="max-w-3xl text-base text-zinc-650 leading-7">
-          Log in to manage content, review leads, and maintain your enterprise-grade audience pipeline.
+        <p className="text-xs uppercase tracking-[0.25em] text-blue-600 dark:text-cyan-400 font-bold">Client Portal</p>
+        <h1 className="text-4xl font-extrabold text-zinc-950 dark:text-white tracking-tight">Secure Admin Console</h1>
+        <p className="max-w-3xl text-sm md:text-base text-zinc-650 dark:text-zinc-400 leading-relaxed">
+          Log in to manage technical ledger notes, review client inquiries, and maintain database leads.
         </p>
       </div>
 
       {!isLoggedIn ? (
-        <div className="glass-card rounded-[2rem] border border-zinc-200 p-8 md:w-3/4 bg-white shadow-sm">
+        <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 p-8 md:max-w-2xl bg-white dark:bg-zinc-900/30 shadow-sm mx-auto">
           <form className="grid gap-6" onSubmit={handleLogin}>
-            <label className="space-y-2 text-xs font-bold text-zinc-700 uppercase tracking-wide block">
+            <label className="space-y-2 text-xs font-bold text-zinc-650 dark:text-zinc-300 uppercase tracking-wide block">
               Email
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3.5 text-zinc-900 text-sm outline-none transition focus:border-zinc-950 font-normal mt-1"
+                className="w-full rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3.5 text-zinc-905 dark:text-white text-sm outline-none transition focus:border-blue-600 dark:focus:border-cyan-400 font-normal mt-1"
               />
             </label>
-            <label className="space-y-2 text-xs font-bold text-zinc-700 uppercase tracking-wide block">
+            <label className="space-y-2 text-xs font-bold text-zinc-650 dark:text-zinc-300 uppercase tracking-wide block">
               Password
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3.5 text-zinc-900 text-sm outline-none transition focus:border-zinc-950 font-normal mt-1"
+                className="w-full rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3.5 text-zinc-905 dark:text-white text-sm outline-none transition focus:border-blue-600 dark:focus:border-cyan-400 font-normal mt-1"
               />
             </label>
             <button
               type="submit"
-              className="inline-flex items-center justify-center rounded-full bg-zinc-950 px-7 py-3.5 text-xs font-semibold text-white transition hover:bg-zinc-800 shadow-sm"
+              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-7 py-3.5 text-xs font-semibold text-white transition hover:opacity-95 shadow-md mt-2"
             >
               {loading ? 'Signing in…' : 'Sign in'}
             </button>
-            {error && <p className="text-sm font-semibold text-rose-800">{error}</p>}
+            {error && <p className="text-xs font-bold text-rose-600 dark:text-rose-450">{error}</p>}
           </form>
         </div>
       ) : (
         <div className="space-y-10">
-          <div className="rounded-[2rem] border border-zinc-200 bg-white p-8 shadow-sm">
+          <div className="rounded-[2rem] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 p-8 shadow-sm">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-zinc-950">Admin Dashboard</h2>
-                <p className="mt-2 text-sm text-zinc-600">Manage blog posts, review incoming leads, and track your pipeline status.</p>
+                <h2 className="text-2xl font-bold text-zinc-950 dark:text-white">Admin Dashboard</h2>
+                <p className="mt-1 text-xs md:text-sm text-zinc-650 dark:text-zinc-400">Manage blog posts, review incoming leads, and track your pipeline status.</p>
               </div>
               <button
                 onClick={handleLogout}
-                className="rounded-full border border-zinc-200 bg-white px-5 py-2.5 text-xs font-semibold text-zinc-850 hover:bg-zinc-50 transition"
+                className="rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 px-5 py-2.5 text-xs font-semibold text-zinc-850 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition shrink-0"
               >
                 Sign out
               </button>
             </div>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl bg-zinc-50 border border-zinc-200 p-5 shadow-sm">
-                <p className="text-[10px] uppercase tracking-wider text-zinc-400 font-bold">Blog posts</p>
-                <p className="mt-2 text-3xl font-extrabold text-zinc-950">{portalSummary.blogs}</p>
+              <div className="rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 p-5 shadow-sm">
+                <p className="text-[9px] uppercase tracking-wider text-zinc-450 dark:text-zinc-500 font-bold">Blog posts</p>
+                <p className="mt-2 text-3xl font-extrabold text-zinc-950 dark:text-white">{portalSummary.blogs}</p>
               </div>
-              <div className="rounded-2xl bg-zinc-50 border border-zinc-200 p-5 shadow-sm">
-                <p className="text-[10px] uppercase tracking-wider text-zinc-400 font-bold">Leads</p>
-                <p className="mt-2 text-3xl font-extrabold text-zinc-950">{portalSummary.leads}</p>
+              <div className="rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 p-5 shadow-sm">
+                <p className="text-[9px] uppercase tracking-wider text-zinc-455 dark:text-zinc-500 font-bold">Leads</p>
+                <p className="mt-2 text-3xl font-extrabold text-zinc-955 dark:text-white">{portalSummary.leads}</p>
               </div>
-              <div className="rounded-2xl bg-zinc-50 border border-zinc-200 p-5 shadow-sm">
-                <p className="text-[10px] uppercase tracking-wider text-zinc-400 font-bold">New</p>
-                <p className="mt-2 text-3xl font-extrabold text-zinc-950">{portalSummary.newLeads}</p>
+              <div className="rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 p-5 shadow-sm">
+                <p className="text-[9px] uppercase tracking-wider text-zinc-455 dark:text-zinc-500 font-bold">New</p>
+                <p className="mt-2 text-3xl font-extrabold text-zinc-955 dark:text-white">{portalSummary.newLeads}</p>
               </div>
             </div>
           </div>
 
           <div className="grid gap-8 xl:grid-cols-[1.2fr_0.8fr]">
-            <div className="glass-card rounded-[2rem] border border-zinc-200 p-8 bg-white shadow-sm">
-              <h2 className="text-xl font-bold text-zinc-950">Blog Manager</h2>
-              <p className="mt-2 text-xs text-zinc-650">Create and publish content securely to the Supabase blogs table.</p>
+            <div className="rounded-[2rem] border border-zinc-200 dark:border-zinc-800 p-8 bg-white dark:bg-zinc-900/30 shadow-sm">
+              <h2 className="text-xl font-bold text-zinc-950 dark:text-white">Blog Manager</h2>
+              <p className="mt-1 text-xs text-zinc-650 dark:text-zinc-400">Create and publish content securely to the Supabase blogs table.</p>
               <form className="mt-8 grid gap-5" onSubmit={handleCreateBlog}>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <input
@@ -228,14 +228,14 @@ function Portal() {
                     onChange={(e) => setDraft({ ...draft, title: e.target.value })}
                     placeholder="Title"
                     required
-                    className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-zinc-900 text-sm outline-none transition focus:border-zinc-950 font-normal"
+                    className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3.5 text-zinc-900 dark:text-zinc-100 text-sm outline-none transition focus:border-blue-600 dark:focus:border-cyan-400 font-normal"
                   />
                   <input
                     value={draft.slug}
                     onChange={(e) => setDraft({ ...draft, slug: e.target.value })}
                     placeholder="Slug"
                     required
-                    className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-zinc-900 text-sm outline-none transition focus:border-zinc-950 font-normal"
+                    className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3.5 text-zinc-900 dark:text-zinc-100 text-sm outline-none transition focus:border-blue-600 dark:focus:border-cyan-400 font-normal"
                   />
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -244,20 +244,20 @@ function Portal() {
                     onChange={(e) => setDraft({ ...draft, excerpt: e.target.value })}
                     placeholder="Excerpt"
                     required
-                    className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-zinc-900 text-sm outline-none transition focus:border-zinc-950 font-normal"
+                    className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3.5 text-zinc-900 dark:text-zinc-100 text-sm outline-none transition focus:border-blue-600 dark:focus:border-cyan-400 font-normal"
                   />
                   <input
                     value={draft.category}
                     onChange={(e) => setDraft({ ...draft, category: e.target.value })}
                     placeholder="Category"
-                    className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-zinc-900 text-sm outline-none transition focus:border-zinc-950 font-normal"
+                    className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3.5 text-zinc-900 dark:text-zinc-100 text-sm outline-none transition focus:border-blue-600 dark:focus:border-cyan-400 font-normal"
                   />
                 </div>
                 <input
                   value={draft.cover_image_url}
                   onChange={(e) => setDraft({ ...draft, cover_image_url: e.target.value })}
                   placeholder="Cover image URL"
-                  className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-zinc-900 text-sm outline-none transition focus:border-zinc-950 font-normal"
+                  className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3.5 text-zinc-900 dark:text-zinc-100 text-sm outline-none transition focus:border-blue-600 dark:focus:border-cyan-400 font-normal"
                 />
                 <textarea
                   value={draft.content}
@@ -265,44 +265,44 @@ function Portal() {
                   placeholder="Content / Markdown"
                   rows={8}
                   required
-                  className="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-zinc-900 text-sm outline-none transition focus:border-zinc-950 font-normal"
+                  className="w-full rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3.5 text-zinc-900 dark:text-zinc-100 text-sm outline-none transition focus:border-blue-600 dark:focus:border-cyan-400 font-normal"
                 />
                 <button
                   type="submit"
                   disabled={saving}
-                  className="inline-flex items-center justify-center rounded-full bg-zinc-950 px-6 py-3.5 text-xs font-semibold text-white transition hover:bg-zinc-800 disabled:opacity-60 shadow-sm"
+                  className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3.5 text-xs font-semibold text-white transition hover:opacity-95 disabled:opacity-60 shadow-sm"
                 >
                   {saving ? 'Saving…' : 'Create Blog Post'}
                 </button>
-                {error && <p className="text-sm font-semibold text-rose-800">{error}</p>}
+                {error && <p className="text-xs font-bold text-rose-600 dark:text-rose-450">{error}</p>}
               </form>
             </div>
 
             <div className="space-y-6">
-              <div className="glass-card rounded-[2rem] border border-zinc-200 p-8 bg-white shadow-sm">
-                <h2 className="text-xl font-bold text-zinc-950">Lead Manager</h2>
-                <p className="mt-2 text-xs text-zinc-650">Review and update incoming inquiries without leaving the portal.</p>
+              <div className="rounded-[2rem] border border-zinc-200 dark:border-zinc-800 p-8 bg-white dark:bg-zinc-900/30 shadow-sm">
+                <h2 className="text-xl font-bold text-zinc-950 dark:text-white">Lead Manager</h2>
+                <p className="mt-1 text-xs text-zinc-650 dark:text-zinc-400">Review and update incoming inquiries without leaving the portal.</p>
                 <div className="mt-6 space-y-4">
-                  {loading && <p className="text-sm text-zinc-600">Loading leads…</p>}
+                  {loading && <p className="text-xs text-zinc-500 dark:text-zinc-450 font-bold">Loading leads…</p>}
                   {leads.slice(0, 5).map((lead) => (
-                    <div key={lead.id} className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4 shadow-sm">
+                    <div key={lead.id} className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 p-4 shadow-sm">
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         <div>
-                          <p className="font-bold text-zinc-900 text-sm">{lead.name}</p>
-                          <p className="text-xs text-zinc-500">{lead.company} · {lead.industry}</p>
+                          <p className="font-bold text-zinc-900 dark:text-zinc-100 text-sm">{lead.name}</p>
+                          <p className="text-xs text-zinc-500 dark:text-zinc-450">{lead.company} · {lead.industry}</p>
                         </div>
-                        <span className="rounded-full bg-white border border-zinc-200 px-3 py-1 text-[10px] uppercase tracking-wider text-zinc-600 font-bold">
+                        <span className="rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-3 py-1 text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-405 font-extrabold shrink-0">
                           {lead.status}
                         </span>
                       </div>
-                      <p className="mt-3 text-xs leading-5 text-zinc-650 font-normal">{lead.message}</p>
-                      <div className="mt-4 flex flex-wrap gap-1.5">
+                      <p className="mt-3 text-xs leading-relaxed text-zinc-650 dark:text-zinc-400 font-medium">{lead.message}</p>
+                      <div className="mt-4 flex flex-wrap gap-1.5 border-t border-zinc-150 dark:border-zinc-800/80 pt-3">
                         {['New', 'Contacted', 'Archiving'].map((state) => (
                           <button
                             key={state}
                             type="button"
                             onClick={() => updateLeadStatus(lead.id, state)}
-                            className="rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-[10px] font-bold text-zinc-700 transition hover:border-zinc-400 hover:text-zinc-900"
+                            className="rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-850 px-3 py-1.5 text-[9px] font-bold text-zinc-700 dark:text-zinc-300 transition hover:border-blue-600 dark:hover:border-cyan-400"
                           >
                             {state}
                           </button>

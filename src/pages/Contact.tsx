@@ -100,7 +100,7 @@ Scale: ${scaleLabel}
 Required Add-ons: ${addonLabels || 'None'}
 Timeline Estimate: ${timeline}
 
-Brief Details: [Please describe your business process here...]`
+Brief Details: [Describe custom workflows or legacy integrations here...]`
 
     setForm({
       ...form,
@@ -119,14 +119,14 @@ Brief Details: [Please describe your business process here...]`
     event.preventDefault()
     if (!supabase) {
       setStatus('error')
-      setError('Supabase is not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to .env.')
+      setError('Supabase Client has not been initialized. Please check config parameters.')
       return
     }
 
     setStatus('sending')
     setError(null)
 
-    const { data, error: submitError } = await supabase.from('leads').insert([
+    const { error: submitError } = await supabase.from('leads').insert([
       {
         name: form.name,
         company: form.company,
@@ -148,7 +148,7 @@ Brief Details: [Please describe your business process here...]`
   }
 
   return (
-    <section className="space-y-12 py-10">
+    <section className="space-y-16 py-8 md:py-16">
       <SEOHead
         title="Contact WisdomCore Solutions | Get a Free ERP & Software Consultation"
         description="Schedule a free technical consultation with WisdomCore Solutions. Get a custom ERP, cloud, AI, or mobile app scope estimate and submit your project inquiry to our engineering team."
@@ -156,27 +156,27 @@ Brief Details: [Please describe your business process here...]`
         canonical="/contact"
       />
       <div className="space-y-4 text-center max-w-4xl mx-auto">
-        <p className="text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold">Lead Acceleration Hub</p>
-        <h1 className="text-4xl font-extrabold text-zinc-950 sm:text-5xl leading-tight tracking-tight">
+        <p className="text-xs uppercase tracking-[0.25em] text-blue-600 dark:text-cyan-400 font-bold">Intake Hub</p>
+        <h1 className="text-4xl font-extrabold text-zinc-950 dark:text-white sm:text-5xl leading-tight tracking-tight">
           Precision scope estimation. No guesswork.
         </h1>
-        <p className="text-base text-zinc-600">
-          Estimate your digital development costs in real-time, then pre-fill your inquiry form to schedule a dedicated technical architecture review.
+        <p className="text-sm md:text-base text-zinc-650 dark:text-zinc-400 leading-relaxed">
+          Estimate your digital implementation timeline in real-time, then apply your configured scope parameters directly to our inquiry system.
         </p>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr]">
+      <div className="grid gap-8 lg:grid-cols-[1.35fr_0.65fr]">
         {/* Estimator Configuration */}
         <div className="space-y-8">
-          <div className="glass-card rounded-[2rem] border border-zinc-200 bg-white p-6 md:p-8 space-y-8 shadow-sm">
-            <div className="flex items-center gap-3 border-b border-zinc-100 pb-4">
-              <Calculator className="text-zinc-900" size={22} />
-              <h2 className="text-xl font-bold text-zinc-950">1. Configure Project Scope</h2>
+          <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-6 md:p-8 space-y-8 shadow-sm">
+            <div className="flex items-center gap-3 border-b border-zinc-150 dark:border-zinc-800/80 pb-4">
+              <Calculator className="text-zinc-900 dark:text-cyan-400" size={22} />
+              <h2 className="text-lg font-bold text-zinc-950 dark:text-white">1. Configure Project Scope</h2>
             </div>
 
             {/* Project Type */}
             <div className="space-y-4">
-              <label className="text-xs uppercase tracking-widest text-zinc-400 font-bold block">Select Application Type</label>
+              <label className="text-[10px] uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-extrabold block">Select Application Type</label>
               <div className="grid gap-3 sm:grid-cols-2">
                 {PROJECT_TYPES.map((type) => (
                   <button
@@ -184,12 +184,12 @@ Brief Details: [Please describe your business process here...]`
                     onClick={() => setProjectType(type.id)}
                     className={`flex flex-col text-left p-4 rounded-2xl border transition duration-150 ${
                       projectType === type.id
-                        ? 'border-zinc-950 bg-zinc-50 text-zinc-950 shadow-sm'
-                        : 'border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50/50'
+                        ? 'border-blue-600 dark:border-cyan-400 bg-blue-50/50 dark:bg-cyan-950/20 text-zinc-950 dark:text-white shadow-sm'
+                        : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50/50'
                     }`}
                   >
                     <span className="font-bold text-sm">{type.label}</span>
-                    <span className="text-xs text-zinc-500 mt-1 line-clamp-2">{type.desc}</span>
+                    <span className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 line-clamp-2">{type.desc}</span>
                   </button>
                 ))}
               </div>
@@ -197,7 +197,7 @@ Brief Details: [Please describe your business process here...]`
 
             {/* Scale / Complexity */}
             <div className="space-y-4">
-              <label className="text-xs uppercase tracking-widest text-zinc-400 font-bold block">Choose Scale & Complexity</label>
+              <label className="text-[10px] uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-extrabold block">Choose Scale & Complexity</label>
               <div className="grid gap-3 sm:grid-cols-3">
                 {Object.entries(SCALE_MULTIPLIERS).map(([key, info]) => (
                   <button
@@ -205,12 +205,12 @@ Brief Details: [Please describe your business process here...]`
                     onClick={() => setScale(key)}
                     className={`flex flex-col text-left p-4 rounded-2xl border transition duration-150 ${
                       scale === key
-                        ? 'border-zinc-950 bg-zinc-50 text-zinc-950 shadow-sm'
-                        : 'border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50/50'
+                        ? 'border-blue-600 dark:border-cyan-400 bg-blue-50/50 dark:bg-cyan-950/20 text-zinc-950 dark:text-white shadow-sm'
+                        : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50/50'
                     }`}
                   >
                     <span className="font-bold text-sm">{info.label}</span>
-                    <span className="text-xs text-zinc-500 mt-1 line-clamp-2">{info.desc}</span>
+                    <span className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 line-clamp-2">{info.desc}</span>
                   </button>
                 ))}
               </div>
@@ -218,7 +218,7 @@ Brief Details: [Please describe your business process here...]`
 
             {/* Add-on Modules */}
             <div className="space-y-4">
-              <label className="text-xs uppercase tracking-widest text-zinc-400 font-bold block">Select Add-on Modules</label>
+              <label className="text-[10px] uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-extrabold block">Select Add-on Modules</label>
               <div className="grid gap-3 sm:grid-cols-2">
                 {Object.entries(ADDON_PRICES).map(([key, info]) => {
                   const Icon = info.icon
@@ -229,17 +229,17 @@ Brief Details: [Please describe your business process here...]`
                       onClick={() => toggleAddon(key)}
                       className={`flex items-center gap-4 p-4 rounded-2xl border text-left transition duration-150 ${
                         isSelected
-                          ? 'border-zinc-950 bg-zinc-50 text-zinc-950 shadow-sm'
-                          : 'border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50/50'
+                          ? 'border-blue-600 dark:border-cyan-400 bg-blue-50/50 dark:bg-cyan-950/20 text-zinc-950 dark:text-white shadow-sm'
+                          : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50/50'
                       }`}
                     >
                       <div className={`p-2.5 rounded-xl border ${
-                        isSelected ? 'border-zinc-800 bg-zinc-900 text-white' : 'border-zinc-200 bg-zinc-50 text-zinc-500'
+                        isSelected ? 'border-blue-600 dark:border-cyan-400 bg-blue-600 dark:bg-cyan-400 text-white dark:text-zinc-950' : 'border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800 text-zinc-500'
                       }`}>
                         <Icon size={16} />
                       </div>
                       <div className="flex-1">
-                        <span className="font-bold text-xs block text-zinc-900">{info.label}</span>
+                        <span className="font-semibold text-xs block text-zinc-900 dark:text-zinc-100">{info.label}</span>
                       </div>
                     </button>
                   )
@@ -250,18 +250,18 @@ Brief Details: [Please describe your business process here...]`
         </div>
 
         {/* Live Estimator Result Card */}
-        <div className="h-fit lg:sticky lg:top-6">
-          <div className="rounded-[2rem] border border-zinc-200 bg-white p-8 shadow-sm space-y-6">
+        <div className="h-fit lg:sticky lg:top-24">
+          <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-8 shadow-sm space-y-6">
             <div className="space-y-1">
-              <p className="text-[10px] uppercase tracking-widest text-zinc-400 font-bold">Live Scope Estimator</p>
-              <h3 className="text-xl font-bold text-zinc-950">Project Scope Details</h3>
+              <p className="text-[10px] uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-extrabold">Scope Summary</p>
+              <h3 className="text-xl font-bold text-zinc-950 dark:text-white">Estimator Results</h3>
             </div>
 
-            <div className="border-t border-b border-zinc-100 py-6 space-y-5">
+            <div className="border-t border-b border-zinc-150 dark:border-zinc-800/80 py-6 space-y-5">
               <div>
-                <p className="text-[10px] uppercase tracking-wider text-zinc-400 font-bold">Estimated Delivery Timeline</p>
-                <div className="flex items-center gap-2 text-zinc-900 font-bold text-base mt-1.5">
-                  <Calendar className="text-zinc-500" size={16} />
+                <p className="text-[10px] uppercase tracking-wider text-zinc-450 dark:text-zinc-400 font-bold">Estimated Delivery Timeline</p>
+                <div className="flex items-center gap-2 text-zinc-900 dark:text-white font-bold text-base mt-2">
+                  <Calendar className="text-blue-600 dark:text-cyan-400" size={16} />
                   <span>{timeline}</span>
                 </div>
               </div>
@@ -269,77 +269,77 @@ Brief Details: [Please describe your business process here...]`
 
             <button
               onClick={handleApplyEstimate}
-              className="w-full flex items-center justify-center gap-2 rounded-full bg-zinc-950 py-3.5 text-xs font-semibold text-white transition hover:bg-zinc-800 shadow-sm"
+              className="w-full flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 py-3.5 text-xs font-semibold text-white transition hover:opacity-95 shadow-md"
             >
               <span>Apply Scope to Form</span>
               <ArrowRight size={14} />
             </button>
             
-            <p className="text-[11px] text-zinc-500 text-center leading-4">
-              *The above timeline is an early architectural estimate based on typical resource scheduling. Actual custom scopes will vary.
+            <p className="text-[10px] text-zinc-500 dark:text-zinc-400 text-center leading-relaxed">
+              *The above timeline is an early engineering estimate based on typical resource scheduling. Actual custom scopes will vary.
             </p>
           </div>
         </div>
       </div>
 
       {/* Form Submission Section */}
-      <div id="lead-form-section" className="glass-card rounded-[2rem] border border-zinc-200 p-8 space-y-8 max-w-5xl mx-auto shadow-sm bg-white">
-        <div className="flex items-center gap-3 border-b border-zinc-100 pb-4">
-          <FileText className="text-zinc-900" size={22} />
-          <h2 className="text-xl font-bold text-zinc-950">2. Submit Architecture Request</h2>
+      <div id="lead-form-section" className="rounded-3xl border border-zinc-250 dark:border-zinc-800 p-8 space-y-8 max-w-5xl mx-auto shadow-sm bg-white dark:bg-zinc-900/20">
+        <div className="flex items-center gap-3 border-b border-zinc-150 dark:border-zinc-800/80 pb-4">
+          <FileText className="text-blue-600 dark:text-cyan-400" size={22} />
+          <h2 className="text-lg font-bold text-zinc-950 dark:text-white">2. Submit Architecture Request</h2>
         </div>
 
         <form className="grid gap-6" onSubmit={handleSubmit}>
           <div className="grid gap-6 sm:grid-cols-2">
-            <label className="space-y-2 text-xs font-bold text-zinc-700 block uppercase tracking-wide">
+            <label className="space-y-2 text-xs font-bold text-zinc-650 dark:text-zinc-300 block uppercase tracking-wide">
               Your Name
               <input
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 required
-                placeholder="e.g. Anirudh Sharma"
-                className="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3.5 text-zinc-900 text-sm outline-none transition focus:border-zinc-950 font-normal mt-1"
+                placeholder="e.g. Sanjay Dhillon"
+                className="w-full rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3.5 text-zinc-900 dark:text-zinc-100 text-sm outline-none transition focus:border-blue-600 dark:focus:border-cyan-400 font-normal mt-1"
               />
             </label>
-            <label className="space-y-2 text-xs font-bold text-zinc-700 block uppercase tracking-wide">
+            <label className="space-y-2 text-xs font-bold text-zinc-650 dark:text-zinc-300 block uppercase tracking-wide">
               Company Name
               <input
                 value={form.company}
                 onChange={(e) => setForm({ ...form, company: e.target.value })}
                 required
-                placeholder="e.g. WisdomCore Solutions"
-                className="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3.5 text-zinc-900 text-sm outline-none transition focus:border-zinc-950 font-normal mt-1"
+                placeholder="e.g. Singhal Logistics"
+                className="w-full rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3.5 text-zinc-900 dark:text-zinc-100 text-sm outline-none transition focus:border-blue-600 dark:focus:border-cyan-400 font-normal mt-1"
               />
             </label>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2">
-            <label className="space-y-2 text-xs font-bold text-zinc-700 block uppercase tracking-wide">
+            <label className="space-y-2 text-xs font-bold text-zinc-650 dark:text-zinc-300 block uppercase tracking-wide">
               Industry Segment
               <select
                 value={form.industry}
                 onChange={(e) => setForm({ ...form, industry: e.target.value })}
-                className="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3.5 text-zinc-900 text-sm outline-none transition focus:border-zinc-950 font-normal mt-1"
+                className="w-full rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3.5 text-zinc-900 dark:text-zinc-100 text-sm outline-none transition focus:border-blue-600 dark:focus:border-cyan-400 font-normal mt-1"
               >
                 {industryOptions.map((industry) => (
-                  <option key={industry} value={industry} className="bg-white text-zinc-900">
+                  <option key={industry} value={industry} className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100">
                     {industry}
                   </option>
                 ))}
               </select>
             </label>
-            <label className="space-y-2 text-xs font-bold text-zinc-700 block uppercase tracking-wide">
+            <label className="space-y-2 text-xs font-bold text-zinc-650 dark:text-zinc-300 block uppercase tracking-wide">
               Target Launch Date / Timeline Goal
               <input
                 value={form.budget}
                 onChange={(e) => setForm({ ...form, budget: e.target.value })}
                 placeholder="e.g. 2 months, Q3 launch, immediate"
-                className="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3.5 text-zinc-900 text-sm outline-none transition focus:border-zinc-950 font-normal mt-1"
+                className="w-full rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3.5 text-zinc-900 dark:text-zinc-100 text-sm outline-none transition focus:border-blue-600 dark:focus:border-cyan-400 font-normal mt-1"
               />
             </label>
           </div>
 
-          <label className="space-y-2 text-xs font-bold text-zinc-700 block uppercase tracking-wide">
+          <label className="space-y-2 text-xs font-bold text-zinc-650 dark:text-zinc-300 block uppercase tracking-wide">
             Intake Project Brief
             <textarea
               value={form.message}
@@ -347,12 +347,12 @@ Brief Details: [Please describe your business process here...]`
               rows={8}
               required
               placeholder="Describe your workflows, user roles, integrations, and performance goals..."
-              className="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3.5 text-zinc-900 text-sm outline-none transition focus:border-zinc-950 font-normal mt-1"
+              className="w-full rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3.5 text-zinc-900 dark:text-zinc-100 text-sm outline-none transition focus:border-blue-600 dark:focus:border-cyan-400 font-normal mt-1"
             />
           </label>
 
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between pt-5 border-t border-zinc-100">
-            <p className="text-xs text-zinc-500 font-medium">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between pt-5 border-t border-zinc-100 dark:border-zinc-800">
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
               {isSupabaseConfigured
                 ? '🔒 Your information is saved directly in our Supabase CRM leads table.'
                 : '⚠️ Supabase keys are missing in .env.'}
@@ -360,7 +360,7 @@ Brief Details: [Please describe your business process here...]`
             <button
               type="submit"
               disabled={!isSupabaseConfigured || status === 'sending'}
-              className="inline-flex items-center justify-center gap-1.5 rounded-full bg-zinc-950 px-8 py-3.5 text-xs font-semibold text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-60 shadow-sm"
+              className="inline-flex items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-3.5 text-xs font-semibold text-white transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60 shadow-md"
             >
               {status === 'sending' ? 'Registering...' : 'Submit Architecture Scope'}
               <Zap size={14} />
@@ -368,12 +368,12 @@ Brief Details: [Please describe your business process here...]`
           </div>
 
           {status === 'success' && (
-            <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-center text-sm font-semibold">
+            <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/80 text-emerald-800 dark:text-emerald-400 text-center text-sm font-semibold">
               ✓ Lead submitted successfully. Our engineering team will review your calculator specifications and schedule a meeting.
             </div>
           )}
           {status === 'error' && (
-            <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-center text-sm font-semibold">
+            <div className="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/80 text-rose-800 dark:text-rose-400 text-center text-sm font-semibold">
               ✗ Submission failed: {error}
             </div>
           )}
